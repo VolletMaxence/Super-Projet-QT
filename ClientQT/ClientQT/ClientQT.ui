@@ -165,7 +165,7 @@
    <sender>envoieInfoLogin</sender>
    <signal>clicked()</signal>
    <receiver>ClientQTClass</receiver>
-   <slot>connexion()</slot>
+   <slot>envoieInfoConnexion()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>375</x>
@@ -180,6 +180,6 @@
  </connections>
  <slots>
   <slot>connectionClientServeur()</slot>
-  <slot>connexion()</slot>
+  <slot>envoieInfoConnexion()</slot>
  </slots>
 </ui>

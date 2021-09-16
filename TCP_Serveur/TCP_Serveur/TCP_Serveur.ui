@@ -56,5 +56,8 @@
  <slots>
   <slot>onServerNewConnection()</slot>
   <slot>onClientReadyRead()</slot>
+  <slot>onClientDisconnected()</slot>
+  <slot>onSocketConnected()</slot>
+  <slot>onSocketDisconnected()</slot>
  </slots>
 </ui>
