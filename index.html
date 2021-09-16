@@ -4,8 +4,8 @@
         <!-- SEO -->
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <meta charset='UTF-8>'>
-            <script type="text/javascript" src="/chat.js"></script>
+            <meta charset='UTF-8'>
+            <script type="text/javascript" src="chat.js"></script>
             <link rel='stylesheet' type='text/css' media='screen' href='index.css'>
             <title>Project Chat C++ / JS</title>
             <meta name='description' content='Project Chat C++ / JS - Chat'>
@@ -23,49 +23,85 @@
     <body>
         <nav class="Menu-Nav">
             <div class="Menu">
-                <li id="AuthMenuOn" class="Sous-Menu-1"><a href="#">Se Déconnecter</a></li>
-                <li id="AuthMenuOff" class="Sous-Menu-1"><a href="#">Se Connecter</a></li>
+                <li id="AuthMenuOn" onclick="Affichage(0)" class="Sous-Menu-1"><a href="#">Se Déconnecter</a></li>
+                <li id="AuthMenuOff" onclick="Affichage(1)" class="Sous-Menu-1"><a href="#">Se Connecter</a></li>
             </div>
         </nav>  
         <div id="AuthChatOn" class="Chat">
             <div class="Div1 Chatbox">
+                <p class="ChatTexte">Texte.</p>
                 <p class="ChatTexte">Texte Exemple</p>
                 <p class="ChatTexte">Texte Exemple</p>
                 <p class="ChatTexte">Texte Exemple</p>
                 <p class="ChatTexte">Texte Exemple</p>
                 <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte.</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte.</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte.</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte.</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte.</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte.</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte.</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte.</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte Exemple</p>
+                <p class="ChatTexte">Texte.</p>
             </div>
             <div class="Div1 DivSendSMG">
-                <form action="" method="POST" class="FormSendMSG">
+                <form method="post" action="" enctype="multipart/form-data" class="FormSendMSG">
                     <textarea class="ChatArea"></textarea>
-                    <input type="file" id="IMG" name="Image" accept="image/png,image/jpeg,image/jpg">
+                    <input type="file" id="IMG" name="Image" accept="image/png, image/jpeg, image/jpg">
                     <input type="submit" value="SubmitSendMSG">
                 </form>
             </div>
         </div> 
         <div id="AuthChatOff" class="Chat">
-            <div class="Div1 Chatbox">
-                <p class="ChatTexte">Connectez-vous avant de pouvoir communiquer.</p>
+            <div class="Div1 BoxNoConnect">
+                <p class="NoConnect">Connectez-vous avant de pouvoir communiquer.</p>
             </div>
         </div>
     </body>
     <script>
-        var AuthChat = 1;
-        function Affichage(){
-            if(AuthChat == 1){
-                document.getElementById('AuthMenuOn').className = "Sous-Menu-1 DisplayON";
-                document.getElementById('AuthMenuOff').className = "Sous-Menu-1 DisplayOFF";
-                document.getElementById('AuthChatOn').className = "Chat DisplayON";
-                document.getElementById('AuthChatOff').className = "Chat DisplayOFF";
-            }
-            else{
-                document.getElementById('AuthMenuOn').className = "Sous-Menu-1 DisplayOFF";
-                document.getElementById('AuthMenuOff').className = "Sous-Menu-1 DisplayON";
-                document.getElementById('AuthChatOn').className = "Chat DisplayOFF";
-                document.getElementById('AuthChatOff').className = "Chat DisplayON";
-            }
+        if(isset(CookieUser)){
+            Affichage(1)
         };
-        window.onload = Affichage();
     </script>
-    <button id="bouton" onClick="Affichage();">Mon Bouton</button>
 </html>
