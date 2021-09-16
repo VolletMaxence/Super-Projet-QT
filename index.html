@@ -5,10 +5,11 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <meta charset='UTF-8>'>
+            <script type="text/javascript" src="/chat.js"></script>
             <link rel='stylesheet' type='text/css' media='screen' href='index.css'>
             <title>Project Chat C++ / JS</title>
             <meta name='description' content='Project Chat C++ / JS - Chat'>
-            <link rel='shortcut icon' href='Icon.svg'>
+            <link rel='shortcut icon' href='/Icon.svg'>
             <meta name='author' content='La Providence'>
         <!-- Facebook -->
             <meta property='og:title' content='Project Chat C++ / JS'>
@@ -22,25 +23,47 @@
     <body>
         <nav class="Menu-Nav">
             <div class="Menu">
-                <li class="Sous-Menu-1"><a href='#'>Se Connecter</a></li>
-                <li class="Sous-Menu-1"><a href='#'>Se Déconnecter</a></li>
+                <li id="AuthMenuOn" class="Sous-Menu-1"><a href="#">Se Déconnecter</a></li>
+                <li id="AuthMenuOff" class="Sous-Menu-1"><a href="#">Se Connecter</a></li>
             </div>
         </nav>  
-        <div class="Chat">
-            <div class="Chatbox">
+        <div id="AuthChatOn" class="Chat">
+            <div class="Div1 Chatbox">
                 <p class="ChatTexte">Texte Exemple</p>
                 <p class="ChatTexte">Texte Exemple</p>
                 <p class="ChatTexte">Texte Exemple</p>
                 <p class="ChatTexte">Texte Exemple</p>
                 <p class="ChatTexte">Texte Exemple</p>
             </div>
-            <div class="DivSendSMG">
-                <form action="" method="get" class="FormSendMSG">
+            <div class="Div1 DivSendSMG">
+                <form action="" method="POST" class="FormSendMSG">
                     <textarea class="ChatArea"></textarea>
                     <input type="file" id="IMG" name="Image" accept="image/png,image/jpeg,image/jpg">
                     <input type="submit" value="SubmitSendMSG">
                 </form>
             </div>
+        </div> 
+        <div id="AuthChatOff" class="Chat">
+            <div class="Div1 Chatbox">
+                <p class="ChatTexte">Connectez-vous avant de pouvoir communiquer.</p>
+            </div>
         </div>
     </body>
+    <script>
+    function Affichage(){
+        if(AuthChat == 1){
+            document.getElementById('AuthOn').className = "Sous-Menu-1 DisplayON";
+            document.getElementById('AuthOff').className = "Sous-Menu-1 DisplayOFF";
+            document.getElementById('AuthChatOn').className = "Chat DisplayON";
+            document.getElementById('AuthChatOff').className = "Chat DisplayOFF";
+        }
+        else{
+            document.getElementById('AuthOn').className = "Sous-Menu-1 DisplayOFF";
+            document.getElementById('AuthOff').className = "Sous-Menu-1 DisplayON";
+            document.getElementById('AuthChatOn').className = "Chat DisplayOFF";
+            document.getElementById('AuthChatOff').className = "Chat DisplayON";
+        }
+    }
+    </script>
+    <button id=bouton onClick=Affichage();>Mon Bouton</button>
 </html>
