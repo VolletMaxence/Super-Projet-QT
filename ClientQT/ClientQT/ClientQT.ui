@@ -14,11 +14,11 @@
    <string>ClientQT</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="envoieMessage">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>410</y>
+      <x>700</x>
+      <y>450</y>
       <width>171</width>
       <height>71</height>
      </rect>
@@ -27,27 +27,112 @@
      <string>Envoi Message</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="texteAEnvoyer">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>260</y>
+      <x>470</x>
+      <y>370</y>
       <width>401</width>
-      <height>151</height>
+      <height>71</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="InfoConnection">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>60</y>
+      <x>620</x>
+      <y>290</y>
       <width>131</width>
       <height>51</height>
      </rect>
     </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="texteRecu">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>461</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Texte Recu</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="ConnectVous">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>100</y>
+      <width>181</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connectez-vous.</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="linePseudo">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>190</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineMdP">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>240</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>190</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Pseudo : </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>240</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Mot de Passe : </string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="envoieInfoLogin">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>290</y>
+      <width>191</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connexion</string>
     </property>
    </widget>
   </widget>
@@ -75,5 +160,26 @@
  <resources>
   <include location="ClientQT.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>envoieInfoLogin</sender>
+   <signal>clicked()</signal>
+   <receiver>ClientQTClass</receiver>
+   <slot>connexion()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>343</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>connectionClientServeur()</slot>
+  <slot>connexion()</slot>
+ </slots>
 </ui>
