@@ -63,7 +63,7 @@
      <string>Texte Recu</string>
     </property>
    </widget>
-   <widget class="QLabel" name="ConnectVous">
+   <widget class="QLabel" name="connectVous">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -96,7 +96,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="labelPseudo">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -109,7 +109,7 @@
      <string>Pseudo : </string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="labelMdP">
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -133,6 +133,19 @@
     </property>
     <property name="text">
      <string>Connexion</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonDeconnexion">
+    <property name="geometry">
+     <rect>
+      <x>754</x>
+      <y>10</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Déconnexion</string>
     </property>
    </widget>
   </widget>
@@ -177,9 +190,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>buttonDeconnexion</sender>
+   <signal>clicked()</signal>
+   <receiver>ClientQTClass</receiver>
+   <slot>deconnexion()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>809</x>
+     <y>63</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>439</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>connectionClientServeur()</slot>
   <slot>envoieInfoConnexion()</slot>
+  <slot>deconnexion()</slot>
  </slots>
 </ui>

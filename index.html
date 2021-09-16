@@ -50,20 +50,22 @@
         </div>
     </body>
     <script>
-    function Affichage(){
-        if(AuthChat == 1){
-            document.getElementById('AuthOn').className = "Sous-Menu-1 DisplayON";
-            document.getElementById('AuthOff').className = "Sous-Menu-1 DisplayOFF";
-            document.getElementById('AuthChatOn').className = "Chat DisplayON";
-            document.getElementById('AuthChatOff').className = "Chat DisplayOFF";
-        }
-        else{
-            document.getElementById('AuthOn').className = "Sous-Menu-1 DisplayOFF";
-            document.getElementById('AuthOff').className = "Sous-Menu-1 DisplayON";
-            document.getElementById('AuthChatOn').className = "Chat DisplayOFF";
-            document.getElementById('AuthChatOff').className = "Chat DisplayON";
-        }
-    }
+        var AuthChat = 1;
+        function Affichage(){
+            if(AuthChat == 1){
+                document.getElementById('AuthMenuOn').className = "Sous-Menu-1 DisplayON";
+                document.getElementById('AuthMenuOff').className = "Sous-Menu-1 DisplayOFF";
+                document.getElementById('AuthChatOn').className = "Chat DisplayON";
+                document.getElementById('AuthChatOff').className = "Chat DisplayOFF";
+            }
+            else{
+                document.getElementById('AuthMenuOn').className = "Sous-Menu-1 DisplayOFF";
+                document.getElementById('AuthMenuOff').className = "Sous-Menu-1 DisplayON";
+                document.getElementById('AuthChatOn').className = "Chat DisplayOFF";
+                document.getElementById('AuthChatOff').className = "Chat DisplayON";
+            }
+        };
+        window.onload = Affichage();
     </script>
-    <button id=bouton onClick=Affichage();>Mon Bouton</button>
+    <button id="bouton" onClick="Affichage();">Mon Bouton</button>
 </html>
