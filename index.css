@@ -83,8 +83,12 @@
     .Sous-Menu-1{
         position:relative;
     }
-    .Sous-Menu-1:hover{
-        display:flex;
+    .Chatbox{
+        overflow-y:scroll;
+        scrollbar-color:rgb(255, 166, 0) rgb(153, 0, 0);
+        scrollbar-width:auto;
+        width:97%;
+        height:75vh;
     }
 /* Color */
     .red{
