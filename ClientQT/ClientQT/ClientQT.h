@@ -18,6 +18,6 @@ class ClientQT : public QMainWindow
 	public slots:
 		void onSocketConnected();
 		void onSocketDisonnected();
-		void connexion();
+		void envoieInfoConnexion();
 		void autorisationConnection();
 };
