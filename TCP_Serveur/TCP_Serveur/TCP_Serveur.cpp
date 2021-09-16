@@ -6,7 +6,7 @@ TCP_Serveur::TCP_Serveur(QWidget *parent)
 	ui.setupUi(this);
 	server = new QTcpServer(this);
 	QObject::connect(server, SIGNAL(newConnection()), this, SLOT(onServerNewConnection()));
-	server->listen(QHostAddress::AnyIPv4, 4321);
+	server->listen(QHostAddress::AnyIPv4, 1234);
 }
 
 void TCP_Serveur::onServerNewConnection()
@@ -19,10 +19,13 @@ void TCP_Serveur::onServerNewConnection()
 
 void TCP_Serveur::onClientDisconnected()
 {
-
+	QTcpSocket * obj = qobject_cast<QTcpSocket*>(sender());
+	QObject::disconnect(obj, SIGNAL(readyRead()), this, SLOT(onClientReadyRead()));
+	QObject::disconnect(obj, SIGNAL(readyRead()), this, SLOT(onClientDisconnected()));
+	obj->deleteLater();
 }
 
 void TCP_Serveur::onClientReadyRead()
 {
-
+	QTcpSocket * obj = qobject_cast<QTcpSocket*>(sender());
 }
