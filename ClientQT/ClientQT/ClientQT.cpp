@@ -7,12 +7,19 @@ ClientQT::ClientQT(QWidget *parent)
 	socket = new QTcpSocket(this);
 	QObject::connect(socket, SIGNAL(connected()), this, SLOT(onSocketConnected()));
 	QObject::connect(socket, SIGNAL(disconnected()), this, SLOT(onSocketDisonnected()));
+	QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(onSocketReadyRead()));
 	//Connection au serveur au lancement
-	socket->connectToHost("127.0.0.1", 1234);
+
+	//Configuration Local
+	//socket->connectToHost("127.0.0.1", 1234);
+	//Configuration Serveur
+	socket->connectToHost("192.168.64.107", 1234);
+
 	//On cache la partit "chat" au lancement pour ne voir que le formulaire de connection
 	ui.texteRecu->setVisible(false);
 	ui.texteAEnvoyer->setVisible(false);
 	ui.envoieMessage->setVisible(false);
+	ui.buttonDeconnexion->setVisible(false);
 }
 
 //Vérifie si Utilisateur est Connecté
@@ -45,8 +52,43 @@ void ClientQT::envoieInfoConnexion()
 	//Faire vérification à partir de serveur, recevoir la reponse pour afficher ou non le chat
 }
 
-void ClientQT::autorisationConnection()
+void ClientQT::onSocketReadyRead()
 {
 	//Récuperer une info pour savoir si les infos envoyers on été accepter
+	QByteArray infoConnectionUser = socket->read(socket->bytesAvailable());
+	QString str(infoConnectionUser);
+	//Si l'info recu correspond a celle qui est attendu : 
+	if (str == "OK")
+	{
+		//Afficher le chat
+		ui.texteRecu->setVisible(true);
+		ui.texteAEnvoyer->setVisible(true);
+		ui.envoieMessage->setVisible(true);
+		ui.buttonDeconnexion->setVisible(true);
 
+		//Cacher le Formulaire
+		ui.connectVous->setVisible(false);
+		ui.labelPseudo->setVisible(false);
+		ui.labelMdP->setVisible(false);
+		ui.linePseudo->setVisible(false);
+		ui.lineMdP->setVisible(false);
+		ui.envoieInfoLogin->setVisible(false);
+	}
+}
+
+void ClientQT::deconnexion()
+{
+	//Afficher le chat
+	ui.texteRecu->setVisible(false);
+	ui.texteAEnvoyer->setVisible(false);
+	ui.envoieMessage->setVisible(false);
+	ui.buttonDeconnexion->setVisible(false);
+
+	//Cacher le Formulaire
+	ui.connectVous->setVisible(true);
+	ui.labelPseudo->setVisible(true);
+	ui.labelMdP->setVisible(true);
+	ui.linePseudo->setVisible(true);
+	ui.lineMdP->setVisible(true);
+	ui.envoieInfoLogin->setVisible(true);
 }
