@@ -105,3 +105,10 @@
     .green{
         color:green;
     }
+/* Display */
+    .DisplayON{
+        display:block;
+    }
+    .DisplayOFF{
+        display:none;
+    }
