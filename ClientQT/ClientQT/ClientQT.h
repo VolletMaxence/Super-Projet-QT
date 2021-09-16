@@ -16,7 +16,6 @@ class ClientQT : public QMainWindow
 		QTcpSocket * socket;
 
 	public slots:
-		void connectionClientServeur();
 		void onSocketConnected();
 		void onSocketDisonnected();
 };
