@@ -20,10 +20,12 @@
             <meta name='twitter:image' content='La Providence'>
     </head>
     <body>
-        <div class="Menu">
-            <li class='Sous-Menu-1'><a href='#'>Se Connecter</a></li>
-            <li class='Sous-Menu-1'><a href='#'>Se Déconnecter</a></li>
-        </div>
+        <nav class="Menu-Nav">
+            <div class="Menu">
+                <li class="Sous-Menu-1"><a href='#'>Se Connecter</a></li>
+                <li class="Sous-Menu-1"><a href='#'>Se Déconnecter</a></li>
+            </div>
+        </nav>  
         <div class="Chat">
             <div class="Chatbox">
                 <p class="ChatTexte">Texte Exemple</p>
@@ -35,6 +37,7 @@
             <div class="DivSendSMG">
                 <form action="" method="get" class="FormSendMSG">
                     <textarea class="ChatArea"></textarea>
+                    <input type="file" id="IMG" name="Image" accept="image/png,image/jpeg,image/jpg">
                     <input type="submit" value="SubmitSendMSG">
                 </form>
             </div>
