@@ -26,7 +26,7 @@ void ClientQT::onSocketDisonnected()
 	ui.InfoConnection->setText("He Disconnected");
 }
 
-void ClientQT::connexion()
+void ClientQT::envoieInfoConnexion()
 {
 	//On recupere ce qui a été saisi dans le formulaire
 	QString Pseudo = ui.linePseudo->text();
