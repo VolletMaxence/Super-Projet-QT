@@ -1,4 +1,5 @@
 #include "TCP_Serveur.h"
+#include <qdebug.h>
 
 TCP_Serveur::TCP_Serveur(QWidget *parent)
     : QMainWindow(parent)
@@ -30,7 +31,8 @@ void TCP_Serveur::onClientDisconnected()
 void TCP_Serveur::onClientReadyRead()
 {
 	QTcpSocket * obj = qobject_cast<QTcpSocket*>(sender());
-	QByteArray data = socket->read(socket->bytesAvailable());
+	QByteArray data = obj->read(obj->bytesAvailable());
 	QString str(data);
-	ui.connectionStatusLabel->setText("Message client " + str);
+
+	ui.listeMessages->setText(str);
 }

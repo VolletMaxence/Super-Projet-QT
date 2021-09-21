@@ -22,18 +22,72 @@ ClientQT::ClientQT(QWidget *parent)
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
 	ui.labelBienvenueX->setVisible(false);
-
+	//On cache formulaire de connexion car on est pas sur d'être connecter
+	ui.connectVous->setVisible(false);
+	ui.labelPseudo->setVisible(false);
+	ui.labelMdP->setVisible(false);
+	ui.linePseudo->setVisible(false);
+	ui.lineMdP->setVisible(false);
+	ui.envoieInfoLogin->setVisible(false);
+	ui.buttonRedirectCreationUser->setVisible(false);
+	//On cache formulaire d'inscription car on en a pas besoin
+	ui.lineMdPInscription->setVisible(false);
+	ui.linePseudoInscription->setVisible(false);
+	ui.inscriptionCompte->setVisible(false);
 }
 
 //Vérifie si Utilisateur est Connecté
 void ClientQT::onSocketConnected()
 {
 	ui.InfoConnection->setText("He Reconnected");
+	//Cache le boutton de connexion au serveur car on est connecté de base
+	ui.buttonConnexionServeur->setVisible(false);
+	/*
+	ui.texteRecu->setVisible(false);
+	ui.texteAEnvoyer->setVisible(false);
+	ui.envoieMessage->setVisible(false);
+	ui.buttonDeconnexion->setVisible(false);
+	ui.labelBienvenueX->setVisible(false);
+	*/
+	ui.connectVous->setVisible(true);
+	ui.labelPseudo->setVisible(true);
+	ui.labelMdP->setVisible(true);
+	ui.linePseudo->setVisible(true);
+	ui.lineMdP->setVisible(true);
+	ui.envoieInfoLogin->setVisible(true);
+	ui.buttonRedirectCreationUser->setVisible(true);
+
 }
 
 void ClientQT::onSocketDisonnected()
 {
+	//Cacher tout : on c est déco lol
+	ui.texteRecu->setVisible(false);
+	ui.texteAEnvoyer->setVisible(false);
+	ui.envoieMessage->setVisible(false);
+	ui.buttonDeconnexion->setVisible(false);
+
+	ui.connectVous->setVisible(false);
+	ui.labelPseudo->setVisible(false);
+	ui.labelMdP->setVisible(false);
+	ui.linePseudo->setVisible(false);
+	ui.lineMdP->setVisible(false);
+	ui.envoieInfoLogin->setVisible(false);
+	ui.labelBienvenueX->setVisible(false);
+	ui.buttonRedirectCreationUser->setVisible(false);
+	
+
 	ui.InfoConnection->setText("He Disconnected");
+
+	ui.buttonConnexionServeur->setVisible(true);
+
+	ui.infoServeur->setText("Le serveur ne fonctionne pas, cliquer sur le boutton pour reessayer.");
+
+}
+
+void ClientQT::connexionServeur()
+{
+	socket->connectToHost("192.168.64.107", 4321);
 }
 
 void ClientQT::envoieInfoConnexion()
@@ -55,8 +109,7 @@ void ClientQT::envoieInfoConnexion()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("Pseudo : "+ PseudoEncode);
-		socket->write(" MdP : " + MdPEncode +"\n");
+		socket->write("LOGIN :: Pseudo : "+ PseudoEncode + " MdP : " + MdPEncode + "\n");
 	}
 	//Faire vérification à partir de serveur, recevoir la reponse pour afficher ou non le chat
 }
@@ -82,13 +135,13 @@ void ClientQT::onSocketReadyRead()
 
 void ClientQT::deconnexion()
 {
-	//Afficher le chat
+	//Cacher le chat
 	ui.texteRecu->setVisible(false);
 	ui.texteAEnvoyer->setVisible(false);
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
 
-	//Cacher le Formulaire
+	//Afficehr le Formulaire
 	ui.connectVous->setVisible(true);
 	ui.labelPseudo->setVisible(true);
 	ui.labelMdP->setVisible(true);
@@ -96,9 +149,66 @@ void ClientQT::deconnexion()
 	ui.lineMdP->setVisible(true);
 	ui.envoieInfoLogin->setVisible(true);
 	ui.labelBienvenueX->setVisible(true);
-
+	ui.buttonRedirectCreationUser->setVisible(true);
 }
 
+
+void ClientQT::redirectInscription()
+{
+	//Cacher le Formulaire Connection
+	ui.connectVous->setVisible(false);
+	ui.labelPseudo->setVisible(false);
+	ui.labelMdP->setVisible(false);
+	ui.linePseudo->setVisible(false);
+	ui.lineMdP->setVisible(false);
+	ui.envoieInfoLogin->setVisible(false);
+	ui.labelBienvenueX->setVisible(false);
+	ui.buttonRedirectCreationUser->setVisible(false);
+	//Affichage Formulaire Inscription
+	ui.lineMdPInscription->setVisible(true);
+	ui.linePseudoInscription->setVisible(true);
+	ui.inscriptionCompte->setVisible(true);
+}
+
+void ClientQT::retourConnexion()
+{
+	//Cacher le Formulaire Connection
+	ui.connectVous->setVisible(true);
+	ui.labelPseudo->setVisible(true);
+	ui.labelMdP->setVisible(true);
+	ui.linePseudo->setVisible(true);
+	ui.lineMdP->setVisible(true);
+	ui.envoieInfoLogin->setVisible(true);
+	ui.labelBienvenueX->setVisible(true);
+	ui.buttonRedirectCreationUser->setVisible(true);
+	//Affichage Formulaire Inscription
+	ui.lineMdPInscription->setVisible(false);
+	ui.linePseudoInscription->setVisible(false);
+	ui.inscriptionCompte->setVisible(false);
+}
+
+void ClientQT::envoieInscription()
+{
+	//On retire le boutton pour éviter le surplus d'info
+	ui.envoieInfoLogin->setEnabled(false);
+
+	//On recupere ce qui a été saisi dans le formulaire
+	QString InscriptionPseudo = ui.linePseudo->text();
+	QString InscriptionMdP = ui.lineMdP->text();
+
+	//Convertion des donnée en Array pour envoyer au serveur
+	QByteArray InscriptionPseudoEncode = InscriptionPseudo.toUtf8();
+	QByteArray InscriptionMdPEncode = InscriptionMdP.toUtf8();
+
+	//On stock le pseudo entré dans l'objet
+	QString save_Pseudo = InscriptionPseudoEncode;
+
+	if (socket->state() == QTcpSocket::ConnectedState)
+	{
+		//Envoie des infos entré dans formulaire : 
+		socket->write("LOGIN :: Pseudo : " + InscriptionPseudoEncode + " MdP : " + InscriptionMdPEncode + "\n");
+	}
+}
 /* En attente de reception message
 void ClientQT::receptionInfoLogin()
 {
@@ -113,7 +223,7 @@ void ClientQT::receptionInfoLogin()
 		ui.texteAEnvoyer->setVisible(true);
 		ui.envoieMessage->setVisible(true);
 		ui.buttonDeconnexion->setVisible(true);
-		ui.labelBienvenueX->setVisible(false);
+		ui.labelBienvenueX->setVisible(true);
 
 
 		//Cacher le Formulaire
@@ -123,6 +233,8 @@ void ClientQT::receptionInfoLogin()
 		ui.linePseudo->setVisible(false);
 		ui.lineMdP->setVisible(false);
 		ui.envoieInfoLogin->setVisible(false);
+		ui.buttonRedirectCreationUser->setVisible(false);
+
 
 		//Remplir le Chat
 
@@ -132,7 +244,7 @@ void ClientQT::receptionInfoLogin()
 		//Affichage message d erreur
 	}
 
-	//ON remet en place le boutton
+	//ON remet en place le boutton pour recommencer au cas où il le faudrait
 	ui.envoieInfoLogin->setEnabled(true);
 
 }

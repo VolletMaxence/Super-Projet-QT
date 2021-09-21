@@ -2,8 +2,11 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_TCP_Serveur.h"
+
 #include <qtcpserver.h>
 #include <qtcpsocket.h>
+#include <qtwidgets>
+
 
 class TCP_Serveur : public QMainWindow
 {

@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="envoieMessage">
     <property name="geometry">
      <rect>
-      <x>700</x>
+      <x>710</x>
       <y>450</y>
       <width>171</width>
       <height>71</height>
@@ -30,7 +30,7 @@
    <widget class="QPlainTextEdit" name="texteAEnvoyer">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>480</x>
       <y>370</y>
       <width>401</width>
       <height>71</height>
@@ -66,9 +66,9 @@
    <widget class="QLabel" name="connectVous">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>100</y>
-      <width>181</width>
+      <x>360</x>
+      <y>140</y>
+      <width>171</width>
       <height>61</height>
      </rect>
     </property>
@@ -79,9 +79,9 @@
    <widget class="QLineEdit" name="linePseudo">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>190</y>
-      <width>161</width>
+      <x>360</x>
+      <y>210</y>
+      <width>171</width>
       <height>31</height>
      </rect>
     </property>
@@ -89,9 +89,9 @@
    <widget class="QLineEdit" name="lineMdP">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>240</y>
-      <width>161</width>
+      <x>360</x>
+      <y>270</y>
+      <width>171</width>
       <height>31</height>
      </rect>
     </property>
@@ -105,9 +105,9 @@
    <widget class="QLabel" name="labelPseudo">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>190</y>
-      <width>91</width>
+      <x>290</x>
+      <y>210</y>
+      <width>51</width>
       <height>31</height>
      </rect>
     </property>
@@ -118,9 +118,9 @@
    <widget class="QLabel" name="labelMdP">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>240</y>
-      <width>91</width>
+      <x>260</x>
+      <y>270</y>
+      <width>71</width>
       <height>31</height>
      </rect>
     </property>
@@ -131,8 +131,8 @@
    <widget class="QPushButton" name="envoieInfoLogin">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>290</y>
+      <x>350</x>
+      <y>320</y>
       <width>191</width>
       <height>41</height>
      </rect>
@@ -165,16 +165,113 @@
    <widget class="QLabel" name="labelBienvenueX">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>340</y>
+      <x>540</x>
+      <y>350</y>
+      <width>331</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bienvenue.</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonConnexionServeur">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>190</y>
+      <width>211</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Connection au serveur</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="infoServeur">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>320</y>
       <width>401</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Bienvenue</string>
+     <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="buttonRedirectCreationUser">
+    <property name="geometry">
+     <rect>
+      <x>404</x>
+      <y>390</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Inscrit-Toi</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="linePseudoInscription">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>210</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineMdPInscription">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>270</y>
+      <width>171</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="inscriptionCompte">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>390</y>
+      <width>141</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Inscription</string>
+    </property>
+   </widget>
+   <zorder>envoieMessage</zorder>
+   <zorder>texteAEnvoyer</zorder>
+   <zorder>InfoConnection</zorder>
+   <zorder>texteRecu</zorder>
+   <zorder>connectVous</zorder>
+   <zorder>linePseudo</zorder>
+   <zorder>lineMdP</zorder>
+   <zorder>labelPseudo</zorder>
+   <zorder>labelMdP</zorder>
+   <zorder>envoieInfoLogin</zorder>
+   <zorder>buttonDeconnexion</zorder>
+   <zorder>labelBienvenueX</zorder>
+   <zorder>infoServeur</zorder>
+   <zorder>buttonRedirectCreationUser</zorder>
+   <zorder>linePseudoInscription</zorder>
+   <zorder>lineMdPInscription</zorder>
+   <zorder>buttonConnexionServeur</zorder>
+   <zorder>inscriptionCompte</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -233,10 +330,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>envoieMessage</sender>
+   <signal>clicked()</signal>
+   <receiver>ClientQTClass</receiver>
+   <slot>connexionServeur()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>785</x>
+     <y>518</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonRedirectCreationUser</sender>
+   <signal>clicked()</signal>
+   <receiver>ClientQTClass</receiver>
+   <slot>redirectInscription()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>438</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>connectionClientServeur()</slot>
   <slot>envoieInfoConnexion()</slot>
   <slot>deconnexion()</slot>
+  <slot>connexionServeur()</slot>
+  <slot>redirectInscription()</slot>
  </slots>
 </ui>
