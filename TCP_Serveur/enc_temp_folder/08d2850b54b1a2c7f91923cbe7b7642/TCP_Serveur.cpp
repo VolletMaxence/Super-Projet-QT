@@ -32,5 +32,5 @@ void TCP_Serveur::onClientReadyRead()
 	QTcpSocket * obj = qobject_cast<QTcpSocket*>(sender());
 	QByteArray data = socket->read(socket->bytesAvailable());
 	QString str(data);
-	ui.connectionStatusLabel->setText("Message client " + str);
+	ui.connectionStatusLabel->setText("Message client " + data);
 }
