@@ -31,7 +31,7 @@ void TCP_Serveur::onClientDisconnected()
 void TCP_Serveur::onClientReadyRead()
 {
 	QTcpSocket * obj = qobject_cast<QTcpSocket*>(sender());
-	QByteArray data = obj->read(obj->bytesAvailable() < 64 ? 64 : obj->bytesAvailable());
+	QByteArray data = obj->read(obj->bytesAvailable());
 	QString str(data);
 
 	ui.listeMessages->setText(str);
