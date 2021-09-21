@@ -22,18 +22,64 @@ ClientQT::ClientQT(QWidget *parent)
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
 	ui.labelBienvenueX->setVisible(false);
-
+	//On cache formulaire de connexion car on est pas sur d'être connecter
+	ui.connectVous->setVisible(false);
+	ui.labelPseudo->setVisible(false);
+	ui.labelMdP->setVisible(false);
+	ui.linePseudo->setVisible(false);
+	ui.lineMdP->setVisible(false);
+	ui.envoieInfoLogin->setVisible(false);
+	ui.labelBienvenueX->setVisible(false);
 }
 
 //Vérifie si Utilisateur est Connecté
 void ClientQT::onSocketConnected()
 {
 	ui.InfoConnection->setText("He Reconnected");
+	//Cache le boutton de connexion au serveur car on est connecté de base
+	ui.buttonConnexionServeur->setVisible(false);
+	/*
+	ui.texteRecu->setVisible(false);
+	ui.texteAEnvoyer->setVisible(false);
+	ui.envoieMessage->setVisible(false);
+	ui.buttonDeconnexion->setVisible(false);
+	*/
+	ui.connectVous->setVisible(true);
+	ui.labelPseudo->setVisible(true);
+	ui.labelMdP->setVisible(true);
+	ui.linePseudo->setVisible(true);
+	ui.lineMdP->setVisible(true);
+	ui.envoieInfoLogin->setVisible(true);
+	ui.labelBienvenueX->setVisible(true);
 }
 
 void ClientQT::onSocketDisonnected()
 {
+	//Cacher tout : on c est déco lol
+	ui.texteRecu->setVisible(false);
+	ui.texteAEnvoyer->setVisible(false);
+	ui.envoieMessage->setVisible(false);
+	ui.buttonDeconnexion->setVisible(false);
+
+	ui.connectVous->setVisible(false);
+	ui.labelPseudo->setVisible(false);
+	ui.labelMdP->setVisible(false);
+	ui.linePseudo->setVisible(false);
+	ui.lineMdP->setVisible(false);
+	ui.envoieInfoLogin->setVisible(false);
+	ui.labelBienvenueX->setVisible(false);
+
 	ui.InfoConnection->setText("He Disconnected");
+
+	ui.buttonConnexionServeur->setVisible(true);
+
+	ui.infoServeur->setText("Le serveur ne fonctionne pas, cliquer sur le boutton pour reessayer.");
+
+}
+
+void ClientQT::connexionServeur()
+{
+	socket->connectToHost("192.168.64.107", 4321);
 }
 
 void ClientQT::envoieInfoConnexion()
@@ -55,8 +101,7 @@ void ClientQT::envoieInfoConnexion()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("Pseudo : "+ PseudoEncode);
-		socket->write(" MdP : " + MdPEncode +"\n");
+		socket->write("LOGIN :: Pseudo : "+ PseudoEncode + " MdP : " + MdPEncode + "\n");
 	}
 	//Faire vérification à partir de serveur, recevoir la reponse pour afficher ou non le chat
 }
@@ -132,7 +177,7 @@ void ClientQT::receptionInfoLogin()
 		//Affichage message d erreur
 	}
 
-	//ON remet en place le boutton
+	//ON remet en place le boutton pour recommencer au cas où il le faudrait
 	ui.envoieInfoLogin->setEnabled(true);
 
 }
