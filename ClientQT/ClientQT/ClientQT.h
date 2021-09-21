@@ -20,8 +20,11 @@ class ClientQT : public QMainWindow
 		void onSocketDisonnected();
 		void envoieInfoConnexion();
 		void onSocketReadyRead();
+
+		/* En attente reception message serveur
 		void receptionInfoLogin();
 		void receptionInfoMessage();
+		*/
 
 		//En attente d'implementation de classe user
 		void deconnexion();

@@ -95,6 +95,12 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="contextMenuPolicy">
+     <enum>Qt::DefaultContextMenu</enum>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
    </widget>
    <widget class="QLabel" name="labelPseudo">
     <property name="geometry">
@@ -131,6 +137,14 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+      <kerning>true</kerning>
+     </font>
+    </property>
     <property name="text">
      <string>Connexion</string>
     </property>
@@ -153,7 +167,7 @@
      <rect>
       <x>470</x>
       <y>340</y>
-      <width>101</width>
+      <width>401</width>
       <height>21</height>
      </rect>
     </property>

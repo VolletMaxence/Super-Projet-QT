@@ -14,7 +14,7 @@ ClientQT::ClientQT(QWidget *parent)
 	//Configuration Local
 	//socket->connectToHost("127.0.0.1", 1234);
 	//Configuration Serveur
-	socket->connectToHost("192.168.64.107", 1234);
+	socket->connectToHost("192.168.64.107", 4321);
 
 	//On cache la partit "chat" au lancement pour ne voir que le formulaire de connection
 	ui.texteRecu->setVisible(false);
@@ -38,6 +38,9 @@ void ClientQT::onSocketDisonnected()
 
 void ClientQT::envoieInfoConnexion()
 {
+	//On retire le boutton pour éviter le surplus d'info
+	ui.envoieInfoLogin->setEnabled(false);
+
 	//On recupere ce qui a été saisi dans le formulaire
 	QString Pseudo = ui.linePseudo->text();
 	QString MdP = ui.lineMdP->text();
@@ -68,11 +71,11 @@ void ClientQT::onSocketReadyRead()
 	//Lancement methode pour connecter
 	if (str == "LOK" || str == "NLOK")
 	{
-		ClientQT::receptionInfoLogin();
+		//ClientQT::receptionInfoLogin();
 	}
 	else if (str == "MOK" || str == "NMOK")
 	{
-		ClientQT::receptionInfoMessage();
+		//ClientQT::receptionInfoMessage();
 	}
 
 }
@@ -96,13 +99,14 @@ void ClientQT::deconnexion()
 
 }
 
+/* En attente de reception message
 void ClientQT::receptionInfoLogin()
 {
 	//UserName stocker avant : on l effacera si c est pas le bon (?)
 	if (str == "LOK")
 	{
 		//On remplace ce qu'il y a dans le labelBienvenueX :
-		ui.labelBienvenueX->setText("Bienvenue %s.", save_Pseudo);
+		ui.labelBienvenueX->setText("Bienvenue "+ save_Pseudo +".");
 
 		//Afficher le chat
 		ui.texteRecu->setVisible(true);
@@ -127,6 +131,10 @@ void ClientQT::receptionInfoLogin()
 	{
 		//Affichage message d erreur
 	}
+
+	//ON remet en place le boutton
+	ui.envoieInfoLogin->setEnabled(true);
+
 }
 
 void ClientQT::receptionInfoMessage()
@@ -138,3 +146,5 @@ void ClientQT::receptionInfoMessage()
 	//Système de mot banni ?
 	//Affichage de message d erreur
 }
+
+*/
