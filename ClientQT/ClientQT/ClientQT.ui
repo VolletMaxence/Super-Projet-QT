@@ -172,7 +172,33 @@
      </rect>
     </property>
     <property name="text">
-     <string>Bienvenue</string>
+     <string>Bienvenue.</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonConnexionServeur">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>180</y>
+      <width>191</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connection au serveur</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="infoServeur">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>290</y>
+      <width>401</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
@@ -233,10 +259,27 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>envoieMessage</sender>
+   <signal>clicked()</signal>
+   <receiver>ClientQTClass</receiver>
+   <slot>connexionServeur()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>785</x>
+     <y>518</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>connectionClientServeur()</slot>
   <slot>envoieInfoConnexion()</slot>
   <slot>deconnexion()</slot>
+  <slot>connexionServeur()</slot>
  </slots>
 </ui>
