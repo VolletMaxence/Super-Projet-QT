@@ -38,12 +38,12 @@ void ClientQT::onSocketConnected()
 	ui.InfoConnection->setText("He Reconnected");
 	//Cache le boutton de connexion au serveur car on est connecté de base
 	ui.buttonConnexionServeur->setVisible(false);
-
-	ui.texteRecu->setVisible(true);
-	ui.texteAEnvoyer->setVisible(true);
-	ui.envoieMessage->setVisible(true);
-	ui.buttonDeconnexion->setVisible(true);
-
+	/*
+	ui.texteRecu->setVisible(false);
+	ui.texteAEnvoyer->setVisible(false);
+	ui.envoieMessage->setVisible(false);
+	ui.buttonDeconnexion->setVisible(false);
+	*/
 	ui.connectVous->setVisible(true);
 	ui.labelPseudo->setVisible(true);
 	ui.labelMdP->setVisible(true);
