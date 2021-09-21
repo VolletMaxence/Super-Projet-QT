@@ -20,7 +20,11 @@
             <meta name='twitter:description' content='Project Chat C++ / JS - Chat'>
             <meta name='twitter:image' content='La Providence'>
         <!-- Formulaire -->
-            
+            <link rel="stylesheet" href="src/jquery-ui.css">
+            <link rel="stylesheet" href="src/style.css">
+            <script type="text/javascript" src="src/jquery-1.12.4.js"></script>
+            <script type="text/javascript" src="src/jquery-ui.js"></script>
+            <script type="text/javascript" src="src/script-ui.js"></script>
     </head>
     <body>
         <nav class="Menu-Nav">
@@ -99,6 +103,23 @@
             <div class="Div1 BoxNoConnect">
                 <p class="NoConnect">Connectez-vous avant de pouvoir communiquer.</p>
             </div>
+        </div>
+        <!-- Formulaire Inscription -->
+        <div>
+            <div id="dialog-form" title="Inscription">
+                <p class="validateTips">Tout les champs sont requis.</p>
+                <form>
+                    <fieldset>
+                    <label for="name">Pseudo</label>
+                    <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+                    <label for="password">Mots de passe</label>
+                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
+                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                    </fieldset>
+                </form>
+            </div>
+            <button id="create-user">Créer un compte</button>
         </div>
     </body>
     <script>
