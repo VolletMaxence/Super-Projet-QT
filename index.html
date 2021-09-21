@@ -24,7 +24,7 @@
         <nav class="Menu-Nav">
             <div class="Menu">
                 <li id="AuthMenuOn" onclick="Affichage(0)" class="Sous-Menu-1"><a href="#">Se Déconnecter</a></li>
-                <li id="AuthMenuOff" onclick="Affichage(1)" class="Sous-Menu-1"><a href="#">Se Connecter</a></li>
+                <li id="AuthMenuOff" onclick="Affichage(1)" onclick="Affichage(1)" class="Sous-Menu-1"><a href="#">Se Connecter</a></li>
             </div>
         </nav>  
         <div id="AuthChatOn" class="Chat">
@@ -100,8 +100,11 @@
         </div>
     </body>
     <script>
-        if(isset(CookieUser)){
-            Affichage(1)
+        if(typeof CookieUser !== 'undefined'){
+            Affichage(1);
+        }
+        else{
+            Affichage(0);
         };
     </script>
 </html>
