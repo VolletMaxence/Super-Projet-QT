@@ -85,11 +85,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="user.cpp" />
     <QtRcc Include="ClientQT.qrc" />
     <QtUic Include="ClientQT.ui" />
     <QtMoc Include="ClientQT.h" />
     <ClCompile Include="ClientQT.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="user.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

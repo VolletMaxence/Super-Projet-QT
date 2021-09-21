@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>880</width>
+    <width>883</width>
     <height>581</height>
    </rect>
   </property>
@@ -148,13 +148,26 @@
      <string>Déconnexion</string>
     </property>
    </widget>
+   <widget class="QLabel" name="labelBienvenueX">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>340</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bienvenue</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>880</width>
+     <width>883</width>
      <height>21</height>
     </rect>
    </property>
