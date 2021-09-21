@@ -18,6 +18,6 @@ public:
 	//fonction qui permet a l'utilisateur de se deconnecter elle prend rien en parametre et elle return rien
 	void Deconnexion();
 	//fonction qui permet a l'utilisateur de sincrire elle prend en parametre un pseudo et un mdp elle returne rien
-	void Creation(char Pseudo, char Mdp);
+	void Creation();
 };
 
