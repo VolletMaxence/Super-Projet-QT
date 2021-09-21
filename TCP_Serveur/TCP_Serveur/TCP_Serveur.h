@@ -18,6 +18,7 @@ private:
 	QTcpSocket * socket;
 
 public slots:
+	void onSocketReadyRead();
 	void onServerNewConnection();
 	void onClientDisconnected();
 	void onClientReadyRead();

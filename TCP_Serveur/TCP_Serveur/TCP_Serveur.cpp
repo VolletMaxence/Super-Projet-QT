@@ -4,9 +4,16 @@ TCP_Serveur::TCP_Serveur(QWidget *parent)
     : QMainWindow(parent)
 {
 	ui.setupUi(this);
+	socket = new QTcpSocket(this);
+	QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(onSocketReadyRead()));
 	server = new QTcpServer(this);
 	QObject::connect(server, SIGNAL(newConnection()), this, SLOT(onServerNewConnection()));
-	server->listen(QHostAddress::AnyIPv4, 1234);
+	server->listen(QHostAddress::AnyIPv4, 4321);
+}
+
+void TCP_Serveur::onSocketReadyRead()
+{
+	ui.connectionStatusLabel->setText("Des données ont été reçues depuis le serveur !");
 }
 
 void TCP_Serveur::onServerNewConnection()
@@ -15,7 +22,7 @@ void TCP_Serveur::onServerNewConnection()
 	QTcpSocket * client = server->nextPendingConnection();
 	QObject::connect(client, SIGNAL(readyRead()), this, SLOT(onClientReadyRead()));
 	QObject::connect(client, SIGNAL(disconnect()), this, SLOT(onClientDisconnected()));
-}
+} 
 
 void TCP_Serveur::onClientDisconnected()
 {

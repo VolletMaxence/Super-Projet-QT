@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>140</y>
+      <y>150</y>
       <width>221</width>
       <height>41</height>
      </rect>
@@ -57,7 +57,6 @@
   <slot>onServerNewConnection()</slot>
   <slot>onClientReadyRead()</slot>
   <slot>onClientDisconnected()</slot>
-  <slot>onSocketConnected()</slot>
-  <slot>onSocketDisconnected()</slot>
+  <slot>onSocketReadyRead()</slot>
  </slots>
 </ui>
