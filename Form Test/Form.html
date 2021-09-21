@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>jQuery UI Dialog - Modal form</title>
+        <link rel="stylesheet" href="jquery-ui.css">
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="jquery-1.12.4.js"></script>
+        <script type="text/javascript" src="jquery-ui.js"></script>
+        <script type="text/javascript" src="script-ui.js"></script>
+    </head>
+    <body>
+        <div id="dialog-form" title="Inscription">
+            <p class="validateTips">Tout les champs sont requis.</p>
+            <form>
+                <fieldset>
+                <label for="name">Pseudo</label>
+                <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+                <label for="password">Mots de passe</label>
+                <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
+                <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+            </form>
+        </div>
+        <div id="users-contain" class="ui-widget">
+            <h1>Existing Users:</h1>
+            <table id="users" class="ui-widget ui-widget-content">
+                <thead>
+                    <tr class="ui-widget-header ">
+                        <th>Name</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Doe</td>
+                        <td>johndoe1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button id="create-user">Créer un compte</button>
+    </body>
+</html>
