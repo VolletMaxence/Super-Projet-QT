@@ -85,6 +85,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Adminisrateur.cpp" />
+    <ClCompile Include="message.cpp" />
     <ClCompile Include="user.cpp" />
     <QtRcc Include="ClientQT.qrc" />
     <QtUic Include="ClientQT.ui" />
@@ -93,6 +95,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Adminisrateur.h" />
+    <ClInclude Include="message.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
