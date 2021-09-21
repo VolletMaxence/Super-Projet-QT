@@ -1,5 +1,5 @@
 #include "ClientQT.h"
-//#include "user.h"
+#include "user.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
