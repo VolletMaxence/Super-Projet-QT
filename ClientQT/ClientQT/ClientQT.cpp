@@ -1,5 +1,6 @@
 #include "ClientQT.h"
 
+
 ClientQT::ClientQT(QWidget *parent)
 	: QMainWindow(parent)
 {
@@ -20,6 +21,8 @@ ClientQT::ClientQT(QWidget *parent)
 	ui.texteAEnvoyer->setVisible(false);
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
+	ui.labelBienvenueX->setVisible(false);
+
 }
 
 //Vérifie si Utilisateur est Connecté
@@ -43,6 +46,9 @@ void ClientQT::envoieInfoConnexion()
 	QByteArray PseudoEncode = Pseudo.toUtf8();
 	QByteArray MdPEncode = MdP.toUtf8();
 
+	//On stock le pseudo entré dans l'objet
+	QString save_Pseudo = PseudoEncode;
+
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
@@ -55,25 +61,20 @@ void ClientQT::envoieInfoConnexion()
 void ClientQT::onSocketReadyRead()
 {
 	//Récuperer une info pour savoir si les infos envoyers on été accepter
-	QByteArray infoConnectionUser = socket->read(socket->bytesAvailable());
-	QString str(infoConnectionUser);
-	//Si l'info recu correspond a celle qui est attendu : 
-	if (str == "OK")
-	{
-		//Afficher le chat
-		ui.texteRecu->setVisible(true);
-		ui.texteAEnvoyer->setVisible(true);
-		ui.envoieMessage->setVisible(true);
-		ui.buttonDeconnexion->setVisible(true);
+	QByteArray infoMessageRecu = socket->read(socket->bytesAvailable());
+	QString str(infoMessageRecu);
 
-		//Cacher le Formulaire
-		ui.connectVous->setVisible(false);
-		ui.labelPseudo->setVisible(false);
-		ui.labelMdP->setVisible(false);
-		ui.linePseudo->setVisible(false);
-		ui.lineMdP->setVisible(false);
-		ui.envoieInfoLogin->setVisible(false);
+	//Si l'info recu correspond a celle qui est attendu pour connexion : 
+	//Lancement methode pour connecter
+	if (str == "LOK" || str == "NLOK")
+	{
+		ClientQT::receptionInfoLogin();
 	}
+	else if (str == "MOK" || str == "NMOK")
+	{
+		ClientQT::receptionInfoMessage();
+	}
+
 }
 
 void ClientQT::deconnexion()
@@ -91,4 +92,49 @@ void ClientQT::deconnexion()
 	ui.linePseudo->setVisible(true);
 	ui.lineMdP->setVisible(true);
 	ui.envoieInfoLogin->setVisible(true);
+	ui.labelBienvenueX->setVisible(true);
+
+}
+
+void ClientQT::receptionInfoLogin()
+{
+	//UserName stocker avant : on l effacera si c est pas le bon (?)
+	if (str == "LOK")
+	{
+		//On remplace ce qu'il y a dans le labelBienvenueX :
+		ui.labelBienvenueX->setText("Bienvenue %s.", save_Pseudo);
+
+		//Afficher le chat
+		ui.texteRecu->setVisible(true);
+		ui.texteAEnvoyer->setVisible(true);
+		ui.envoieMessage->setVisible(true);
+		ui.buttonDeconnexion->setVisible(true);
+		ui.labelBienvenueX->setVisible(false);
+
+
+		//Cacher le Formulaire
+		ui.connectVous->setVisible(false);
+		ui.labelPseudo->setVisible(false);
+		ui.labelMdP->setVisible(false);
+		ui.linePseudo->setVisible(false);
+		ui.lineMdP->setVisible(false);
+		ui.envoieInfoLogin->setVisible(false);
+
+		//Remplir le Chat
+
+	}
+	else if (str == "NLOK")
+	{
+		//Affichage message d erreur
+	}
+}
+
+void ClientQT::receptionInfoMessage()
+{
+	//Si l'info recu correspond a celle attendu pour reception message : 
+	//Lancement de methode pour actualiser la messagerie
+
+
+	//Système de mot banni ?
+	//Affichage de message d erreur
 }
