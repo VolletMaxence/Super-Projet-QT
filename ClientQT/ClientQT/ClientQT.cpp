@@ -87,9 +87,11 @@ void ClientQT::onSocketDisonnected()
 //Connexion au serveur
 void ClientQT::connexionServeur()
 {
+	//socket->connectToHost("127.0.0.1", 1234);
 	socket->connectToHost("192.168.64.107", 4321);
-	ui.infoServeur->setText("");
 
+	ui.infoServeur->setText("");
+	
 	ui.envoieInfoLogin->setEnabled(true);
 	ui.envoieInfoLogin->setEnabled(true);
 }
@@ -139,15 +141,29 @@ void ClientQT::envoieInscription()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("LOGIN :: Pseudo : " + InscriptionPseudoEncode + " MdP : " + InscriptionMdPEncode + "\n");
+		socket->write("INSCRIPTION :: Pseudo : " + InscriptionPseudoEncode + " MdP : " + InscriptionMdPEncode + "\n");
 	}
 }
 
 //Envoie ce qui à été inserer dans la messagerie pour l envoyer au serveur
 void ClientQT::envoieMessage()
 {
-	// texteAEnvoyer
-	
+	//On recupere ce qu'on a dans le message : 
+	QString MessageEntree = ui.texteAEnvoyer->text();
+	QByteArray MessageEntreeEncode = MessageEntree.toUtf8();
+
+	//On recupere le pseudo qui est connecter :
+	QByteArray PseudoStock = ClientQT::save_Pseudo.toUtf8();
+
+	//Si on est bien connecter : 
+	if (socket->state() == QTcpSocket::ConnectedState)
+	{
+		//Envoie des infos entré dans formulaire : 
+		socket->write(PseudoStock + ": " + MessageEntreeEncode + "\n");
+	}
+
+	//Effacer ce qu'il y avait dans la zone de texte : pas de spam
+	ui.texteAEnvoyer->clear();
 }
 
 //Reception et trie de tout message envoyer par le serveur
@@ -163,13 +179,12 @@ void ClientQT::onSocketReadyRead()
 	if (str == "LOK" || str == "NLOK")
 	{
 		ClientQT::receptionInfoLogin(str);
-	} else if (str == "MOK" || str == "NMOK")
-	{
-		ClientQT::receptionInfoMessage(str);
-	}
-	else if (str == "IOK" || str == "NIOK")
+	} else if (str == "IOK" || str == "NIOK")
 	{
 		ClientQT::receptionInfoInscription(str);
+	} else
+	{
+		ClientQT::receptionInfoMessage(str);
 	}
 
 }
@@ -262,6 +277,8 @@ void ClientQT::receptionInfoLogin(QString str)
 		ui.labelErreur->setText("");
 		//Remplir le Chat (c est deugeulasse, putain de zoophile)
 
+		//On receptionne les messages depuis la BDD
+		socket->write("MSGSVP");
 	}
 	else if (str == "NLOK")
 	{
@@ -277,17 +294,7 @@ void ClientQT::receptionInfoLogin(QString str)
 //Reception des info de messages depuis le Serveur
 void ClientQT::receptionInfoMessage(QString str)
 {
-	//Si l'info recu correspond a celle attendu pour reception message : 
-	//Lancement de methode pour actualiser la messagerie
-	if (str == "MOK")
-	{
-
-
-
-	}
-
-	//Système de mot banni ?
-	//Affichage de message d erreur
+	//recuperer les messages envoyer par le monsieur
 }
 
 //Reception des info d'inscription depuis le Serveur
