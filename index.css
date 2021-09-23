@@ -116,3 +116,4 @@
     .DisplayOFF{
         display:none;
     }
+    input, button { border:none; } 
