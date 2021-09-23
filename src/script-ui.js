@@ -14,6 +14,18 @@ $(function(){
         var co_allFields = $([]).add(co_name).add(co_password);
         var co_tips = $(".co_validateTips");
 
+    // Ouverture des Dialog
+        $("#create_user").button().on("click", function(){
+            in_dialog.dialog("open");
+        });
+        $("#connect_user").button().on("click", function(){
+            co_dialog.dialog("open");
+        });
+        // UnLogin
+        $("#unlogin_user").button().on("click", function(){
+            unlogin();
+        });
+
     // Fonction Suivant Inscription Bouton
         function IN_User(){
             var valid = true;
@@ -77,10 +89,6 @@ $(function(){
             event.preventDefault();
             IN_User();
         });
-
-        $("#create_user").button().on("click", function(){
-            in_dialog.dialog("open");
-        });
         function in_updateTips(t){
             in_tips.text(t).addClass("ui-state-highlight");
             setTimeout(function(){
@@ -127,10 +135,6 @@ $(function(){
         co_form = co_dialog.find("form").on("submit", function(event){
             event.preventDefault();
             CO_User();
-        });
-
-        $("#connect_user").button().on("click", function(){
-            co_dialog.dialog("open");
         });
         function co_updateTips(t){
             co_tips.text(t).addClass("ui-state-highlight");
