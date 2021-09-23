@@ -10,10 +10,13 @@ class ClientQT : public QMainWindow
 
 	public:
 		ClientQT(QWidget *parent = Q_NULLPTR);
+		QString save_Pseudo;
+
 
 	private:
 		Ui::ClientQTClass ui;
 		QTcpSocket * socket;
+
 
 	public slots:
 		void connexionServeur();
@@ -25,10 +28,8 @@ class ClientQT : public QMainWindow
 		void envoieInscription();
 		void retourConnexion();
 
-		/* En attente reception message serveur
-		void receptionInfoLogin();
+		void receptionInfoLogin(QString);
 		void receptionInfoMessage();
-		*/
 
 		//En attente d'implementation de classe user
 		void deconnexion();

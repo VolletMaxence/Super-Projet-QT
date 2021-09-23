@@ -34,6 +34,7 @@ ClientQT::ClientQT(QWidget *parent)
 	ui.lineMdPInscription->setVisible(false);
 	ui.linePseudoInscription->setVisible(false);
 	ui.inscriptionCompte->setVisible(false);
+
 }
 
 //Vérifie si Utilisateur est Connecté
@@ -104,12 +105,12 @@ void ClientQT::envoieInfoConnexion()
 	QByteArray MdPEncode = MdP.toUtf8();
 
 	//On stock le pseudo entré dans l'objet
-	QString save_Pseudo = PseudoEncode;
+	ClientQT::save_Pseudo = Pseudo;
 
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("LOGIN :: Pseudo : "+ PseudoEncode + " MdP : " + MdPEncode + "\n");
+		socket->write("LOGIN :: Pseudo : " + PseudoEncode + " MdP : " + MdPEncode + "\n");
 	}
 	//Faire vérification à partir de serveur, recevoir la reponse pour afficher ou non le chat
 }
@@ -119,16 +120,20 @@ void ClientQT::onSocketReadyRead()
 	//Récuperer une info pour savoir si les infos envoyers on été accepter
 	QByteArray infoMessageRecu = socket->read(socket->bytesAvailable());
 	QString str(infoMessageRecu);
+	const char* strChar = str.toStdString().c_str();
+
+	//ui.InfoConnection->setText("Pseudo stocker : " + str + " // str en char : "+ strChar);
+
 
 	//Si l'info recu correspond a celle qui est attendu pour connexion : 
 	//Lancement methode pour connecter
 	if (str == "LOK" || str == "NLOK")
 	{
-		//ClientQT::receptionInfoLogin();
-	}
+		ClientQT::receptionInfoLogin(str);
+	}//Lancement methode message
 	else if (str == "MOK" || str == "NMOK")
 	{
-		//ClientQT::receptionInfoMessage();
+		ClientQT::receptionInfoMessage();
 	}
 
 }
@@ -157,8 +162,6 @@ void ClientQT::redirectInscription()
 {
 	//Cacher le Formulaire Connection
 	ui.connectVous->setVisible(false);
-	ui.labelPseudo->setVisible(false);
-	ui.labelMdP->setVisible(false);
 	ui.linePseudo->setVisible(false);
 	ui.lineMdP->setVisible(false);
 	ui.envoieInfoLogin->setVisible(false);
@@ -174,10 +177,6 @@ void ClientQT::retourConnexion()
 {
 	//Cacher le Formulaire Connection
 	ui.connectVous->setVisible(true);
-	ui.labelPseudo->setVisible(true);
-	ui.labelMdP->setVisible(true);
-	ui.linePseudo->setVisible(true);
-	ui.lineMdP->setVisible(true);
 	ui.envoieInfoLogin->setVisible(true);
 	ui.labelBienvenueX->setVisible(true);
 	ui.buttonRedirectCreationUser->setVisible(true);
@@ -209,14 +208,19 @@ void ClientQT::envoieInscription()
 		socket->write("LOGIN :: Pseudo : " + InscriptionPseudoEncode + " MdP : " + InscriptionMdPEncode + "\n");
 	}
 }
-/* En attente de reception message
-void ClientQT::receptionInfoLogin()
+
+void ClientQT::receptionInfoLogin(QString str)
 {
 	//UserName stocker avant : on l effacera si c est pas le bon (?)
 	if (str == "LOK")
 	{
+		//Récuperer le pseudo stocker :
+		QByteArray PseudoStock = ClientQT::save_Pseudo.toUtf8();
+		ui.InfoConnection->setText("Pseudo stocker :" + PseudoStock + ".");
+		socket->write("Pseudo stocker :" + PseudoStock + ". \n");
+
 		//On remplace ce qu'il y a dans le labelBienvenueX :
-		ui.labelBienvenueX->setText("Bienvenue "+ save_Pseudo +".");
+		ui.labelBienvenueX->setText("Bienvenue "+ PseudoStock);
 
 		//Afficher le chat
 		ui.texteRecu->setVisible(true);
@@ -228,20 +232,19 @@ void ClientQT::receptionInfoLogin()
 
 		//Cacher le Formulaire
 		ui.connectVous->setVisible(false);
-		ui.labelPseudo->setVisible(false);
-		ui.labelMdP->setVisible(false);
 		ui.linePseudo->setVisible(false);
 		ui.lineMdP->setVisible(false);
 		ui.envoieInfoLogin->setVisible(false);
 		ui.buttonRedirectCreationUser->setVisible(false);
 
 
-		//Remplir le Chat
+		//Remplir le Chat (c est deugeulasse, putain de zoophile)
 
 	}
 	else if (str == "NLOK")
 	{
 		//Affichage message d erreur
+		ui.InfoConnection->setText("Message erreur");
 	}
 
 	//ON remet en place le boutton pour recommencer au cas où il le faudrait
@@ -258,5 +261,3 @@ void ClientQT::receptionInfoMessage()
 	//Système de mot banni ?
 	//Affichage de message d erreur
 }
-
-*/
