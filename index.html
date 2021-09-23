@@ -29,8 +29,9 @@
     <body>
         <nav class="Menu-Nav">
             <div class="Menu">
-                <li id="AuthMenuOn" onclick="Affichage(0)" class="Sous-Menu-1"><a href="#">Se Déconnecter</a></li>
-                <li id="AuthMenuOff" onclick="Affichage(1)" onclick="Affichage(1)" class="Sous-Menu-1"><a href="#">Se Connecter</a></li>
+                <li id="unlogin_user" class="Sous-Menu-1"><a href="#">Se Déconnecter</a></li>
+                <li id="connect_user" class="Sous-Menu-1"><a href="#">Se Connecter</a></li>
+                <li id="create_user" class="Sous-Menu-1"><a href="#">S'inscrire</a></li>
             </div>
         </nav>  
         <div id="AuthChatOn" class="Chat">
@@ -105,22 +106,37 @@
             </div>
         </div>
         <!-- Formulaire Inscription -->
-        <div>
-            <div id="dialog-form" title="Inscription">
-                <p class="validateTips">Tout les champs sont requis.</p>
-                <form>
-                    <fieldset>
-                    <label for="name">Pseudo</label>
-                    <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-                    <label for="password">Mots de passe</label>
-                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
-                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
-                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-                    </fieldset>
-                </form>
+            <div>
+                <div id="dialog_inscription" title="Inscription">
+                    <p class="in_validateTips">Tout les champs sont requis.</p>
+                    <form>
+                        <fieldset>
+                        <label for="name">Pseudo</label>
+                        <input type="text" name="name" id="in_name" value="Inscription" class="text ui-widget-content ui-corner-all">
+                        <label for="password">Mots de passe</label>
+                        <input type="password" name="password" id="in_password" value="" class="text ui-widget-content ui-corner-all">
+                        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                        </fieldset>
+                    </form>
+                </div>
             </div>
-            <button id="create-user">Créer un compte</button>
-        </div>
+        <!-- Formulaire Connexion -->
+            <div>
+                <div id="dialog_connect" title="Connexion">
+                    <p class="co_validateTips">Tout les champs sont requis.</p>
+                    <form>
+                        <fieldset>
+                        <label for="name">Pseudo</label>
+                        <input type="text" name="name" id="co_name" value="Connexion" class="text ui-widget-content ui-corner-all">
+                        <label for="password">Mots de passe</label>
+                        <input type="password" name="password" id="co_password" value="" class="text ui-widget-content ui-corner-all">
+                        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
     </body>
     <script>
         if(typeof CookieUser !== 'undefined'){
