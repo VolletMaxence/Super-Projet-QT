@@ -1,5 +1,7 @@
 #include "TCP_Serveur.h"
 #include <qdebug.h>
+#include <QSqlDatabase>
+
 
 TCP_Serveur::TCP_Serveur(QWidget *parent)
     : QMainWindow(parent)
@@ -10,6 +12,13 @@ TCP_Serveur::TCP_Serveur(QWidget *parent)
 	server = new QTcpServer(this);
 	QObject::connect(server, SIGNAL(newConnection()), this, SLOT(onServerNewConnection()));
 	server->listen(QHostAddress::AnyIPv4, 4321);
+
+	QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+	db.setHostName("192.168.64.66");
+	db.setDatabaseName("QT");
+	db.setUserName("root");
+	db.setPassword("root");
+	bool ok = db.open();
 }
 
 void TCP_Serveur::onServerNewConnection()
@@ -34,5 +43,18 @@ void TCP_Serveur::onClientReadyRead()
 	QByteArray data = obj->read(obj->bytesAvailable());
 	QString str(data);
 
-	ui.listeMessages->setText(str);
+	ui.Message->setText(str);
+
+}
+
+void TCP_Serveur::Identification()
+{
+	QTcpSocket * obj = qobject_cast<QTcpSocket*>(sender());
+	QByteArray data = obj->read(obj->bytesAvailable());
+	QString str(data);
+
+	if ()
+	{
+
+	}
 }

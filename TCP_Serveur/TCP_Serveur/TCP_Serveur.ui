@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>30</y>
+      <y>110</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -27,16 +27,21 @@
      <string/>
     </property>
    </widget>
-   <widget class="QTextEdit" name="listeMessages">
+   <widget class="QLabel" name="Message">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>110</y>
-      <width>361</width>
-      <height>191</height>
+      <x>160</x>
+      <y>200</y>
+      <width>191</width>
+      <height>41</height>
      </rect>
     </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
+   <zorder>Message</zorder>
+   <zorder>connectionStatusLabel</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
