@@ -5,8 +5,6 @@
 
     // Chat JS
 
-    // Objets
-
     // Fonctions
         function Affichage(AuthChat){
             if(AuthChat == 1){
@@ -24,4 +22,8 @@
         }
         function AffichageStart(){
             Affichage(0);
+        }
+        // Fonction contact Serveur
+        function ContactServer(content){
+            // Envoyer Variable
         }
