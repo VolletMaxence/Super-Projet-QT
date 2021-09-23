@@ -10,26 +10,31 @@ class ClientQT : public QMainWindow
 
 	public:
 		ClientQT(QWidget *parent = Q_NULLPTR);
+		QString save_Pseudo;
+
 
 	private:
 		Ui::ClientQTClass ui;
 		QTcpSocket * socket;
 
+
 	public slots:
+		//Connexion / Déconnexion au serveur
 		void connexionServeur();
 		void onSocketConnected();
 		void onSocketDisonnected();
+		//Envoie des donnée
 		void envoieInfoConnexion();
-		void onSocketReadyRead();
-		void redirectInscription();
 		void envoieInscription();
+		void envoieMessage();
+		//Redirection vers autre page
+		void redirectInscription();
 		void retourConnexion();
-
-		/* En attente reception message serveur
-		void receptionInfoLogin();
-		void receptionInfoMessage();
-		*/
-
-		//En attente d'implementation de classe user
 		void deconnexion();
+		//Recpetion des messages du serveur
+		void onSocketReadyRead();
+		void receptionInfoLogin(QString);
+		void receptionInfoMessage(QString);
+		void receptionInfoInscription(QString);
+
 };
