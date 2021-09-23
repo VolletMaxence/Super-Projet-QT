@@ -105,22 +105,39 @@
             </div>
         </div>
         <!-- Formulaire Inscription -->
-        <div>
-            <div id="dialog-form" title="Inscription">
-                <p class="validateTips">Tout les champs sont requis.</p>
-                <form>
-                    <fieldset>
-                    <label for="name">Pseudo</label>
-                    <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-                    <label for="password">Mots de passe</label>
-                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
-                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
-                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-                    </fieldset>
-                </form>
+            <div>
+                <div id="dialog-inscription" title="Inscription">
+                    <p class="validateTips">Tout les champs sont requis.</p>
+                    <form>
+                        <fieldset>
+                        <label for="name">Pseudo</label>
+                        <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+                        <label for="password">Mots de passe</label>
+                        <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
+                        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                        </fieldset>
+                    </form>
+                </div>
+                <button id="create-user">Créer un compte</button>
             </div>
-            <button id="create-user">Créer un compte</button>
-        </div>
+        <!-- Formulaire Connexion -->
+            <div>
+                <div id="dialog-connect" title="Connexion">
+                    <p class="validateTips">Tout les champs sont requis.</p>
+                    <form>
+                        <fieldset>
+                        <label for="name">Pseudo</label>
+                        <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+                        <label for="password">Mots de passe</label>
+                        <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
+                        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                        </fieldset>
+                    </form>
+                </div>
+                <button id="connect-user">Se Connecter</button>
+            </div>
     </body>
     <script>
         if(typeof CookieUser !== 'undefined'){

@@ -45,17 +45,17 @@ $(function(){
         valid = valid && checkRegexp(password, /^([0-9a-zA-Z])+$/, "Le mot de passe n'autorise que des chiffres et des lettres.");
 
         if(valid){
-            var Pseudo  =   name.val();
-            var MDP     =   password.val();
+            var Pseudo      =   name.val();
+            var PassWord    =   password.val();
             dialog.dialog("close");
-            window.alert('Le Pseudo est \"' + Pseudo + '\" et le Mots de Passe est \"'+ MDP + '\".')
-            //  LOGIN       : "LOGIN :: Pseudo :: name.val() MdP : password.val() "
-            //  INSCRIPTION : "INSCRIPTION :: Pseudo : Pseudo MdP : MDP "
+            window.alert('Le Pseudo est \"' + Pseudo + '\" et le Mots de Passe est \"'+ PassWord + '\".')
+            //  LOGIN       : "LOGIN :: Pseudo :: Pseudo MdP : PassWord "
+            //  INSCRIPTION : "INSCRIPTION :: Pseudo : Pseudo MdP : PassWord "
         }
         return valid;
     }
 
-    dialog = $("#dialog-form").dialog({
+    dialog = $("#dialog-inscription").dialog({
         autoOpen: false,
         height: 350,
         width: 350,
