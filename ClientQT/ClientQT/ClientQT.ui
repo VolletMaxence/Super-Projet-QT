@@ -327,7 +327,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>E:/Image/1513971351.cyberblue_image - Copie.jpeg</pixmap>
+     <pixmap>../../Image/1513971351.cyberblue_image - Copie.jpeg</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="Caterpie">
