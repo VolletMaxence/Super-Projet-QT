@@ -12,9 +12,9 @@ ClientQT::ClientQT(QWidget *parent)
 	//Connection au serveur au lancement
 
 	//Configuration Local
-	//socket->connectToHost("127.0.0.1", 1234);
+	socket->connectToHost("127.0.0.1", 1234);
 	//Configuration Serveur
-	socket->connectToHost("192.168.64.107", 4321);
+	//socket->connectToHost("192.168.64.107", 4321);
 
 	//On cache la partit "chat" au lancement pour ne voir que le formulaire de connection
 	ui.texteRecu->setVisible(false);

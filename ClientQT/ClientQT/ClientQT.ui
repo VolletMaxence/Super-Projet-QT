@@ -303,6 +303,11 @@
       <height>521</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
    </widget>
    <widget class="QLabel" name="Shellos">
     <property name="geometry">
@@ -313,11 +318,32 @@
       <height>291</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
      <pixmap>E:/Image/1513971351.cyberblue_image - Copie.jpeg</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Caterpie">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>450</y>
+      <width>211</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>E:/Image/14oxf6i8ch351.png</pixmap>
     </property>
    </widget>
    <zorder>texteRecu</zorder>
@@ -340,6 +366,7 @@
    <zorder>labelErreur</zorder>
    <zorder>texteAEnvoyer</zorder>
    <zorder>Shellos</zorder>
+   <zorder>Caterpie</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
