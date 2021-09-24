@@ -12,9 +12,9 @@ ClientQT::ClientQT(QWidget *parent)
 	//Connection au serveur au lancement
 
 	//Configuration Local
-	//socket->connectToHost("127.0.0.1", 1234);
+	socket->connectToHost("127.0.0.1", 1234);
 	//Configuration Serveur
-	socket->connectToHost("192.168.64.107", 4321);
+	//socket->connectToHost("192.168.64.107", 4321);
 
 	//On cache la partit "chat" au lancement pour ne voir que le formulaire de connection
 	ui.texteRecu->setVisible(false);
@@ -22,6 +22,9 @@ ClientQT::ClientQT(QWidget *parent)
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
 	ui.labelBienvenueX->setVisible(false);
+	ui.Shellos->setVisible(false);
+	ui.Caterpie->setVisible(false);
+
 	//On cache formulaire de connexion car on est pas sur d'être connecter
 	ui.connectVous->setVisible(false);
 	ui.labelPseudo->setVisible(false);
@@ -51,7 +54,6 @@ void ClientQT::onSocketConnected()
 	ui.lineMdP->setVisible(true);
 	ui.envoieInfoLogin->setVisible(true);
 	ui.buttonRedirectCreationUser->setVisible(true);
-
 }
 
 //Affiche le boutton pour se connecter si le serveur se coupe
@@ -63,6 +65,8 @@ void ClientQT::onSocketDisonnected()
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
 	ui.labelBienvenueX->setVisible(false);
+	ui.Shellos->setVisible(false);
+	ui.Caterpie->setVisible(false);
 
 	ui.connectVous->setVisible(false);
 	ui.labelPseudo->setVisible(false);
@@ -71,6 +75,7 @@ void ClientQT::onSocketDisonnected()
 	ui.lineMdP->setVisible(false);
 	ui.envoieInfoLogin->setVisible(false);
 	ui.buttonRedirectCreationUser->setVisible(false);
+
 
 	ui.lineMdPInscription->setVisible(false);
 	ui.linePseudoInscription->setVisible(false);
@@ -87,9 +92,11 @@ void ClientQT::onSocketDisonnected()
 //Connexion au serveur
 void ClientQT::connexionServeur()
 {
+	//socket->connectToHost("127.0.0.1", 1234);
 	socket->connectToHost("192.168.64.107", 4321);
-	ui.infoServeur->setText("");
 
+	ui.infoServeur->setText("");
+	
 	ui.envoieInfoLogin->setEnabled(true);
 	ui.envoieInfoLogin->setEnabled(true);
 }
@@ -114,7 +121,10 @@ void ClientQT::envoieInfoConnexion()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("LOGIN :: Pseudo : " + PseudoEncode + " MdP : " + MdPEncode + "\n");
+		socket->write("LOGIN");
+		socket->write(PseudoEncode);
+		socket->write(MdPEncode);
+		//socket->write("LOGIN " + PseudoEncode + " " + MdPEncode);
 	}
 	//Faire vérification à partir de serveur, recevoir la reponse pour afficher ou non le chat
 }
@@ -139,15 +149,32 @@ void ClientQT::envoieInscription()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("LOGIN :: Pseudo : " + InscriptionPseudoEncode + " MdP : " + InscriptionMdPEncode + "\n");
+		socket->write("INSCRIPTION");
+		socket->write(InscriptionPseudoEncode);
+		socket->write(InscriptionMdPEncode);
+		//socket->write("INSCRIPTION " + InscriptionPseudoEncode + " " + InscriptionMdPEncode);
 	}
 }
 
 //Envoie ce qui à été inserer dans la messagerie pour l envoyer au serveur
 void ClientQT::envoieMessage()
 {
-	// texteAEnvoyer
-	
+	//On recupere ce qu'on a dans le message : 
+	QString MessageEntree = ui.texteAEnvoyer->text();
+	QByteArray MessageEntreeEncode = MessageEntree.toUtf8();
+
+	//On recupere le pseudo qui est connecter :
+	QByteArray PseudoStock = ClientQT::save_Pseudo.toUtf8();
+
+	//Si on est bien connecter : 
+	if (socket->state() == QTcpSocket::ConnectedState)
+	{
+		//Envoie des infos entré dans formulaire : 
+		socket->write(PseudoStock + " : " + MessageEntreeEncode + " \n");
+	}
+
+	//Effacer ce qu'il y avait dans la zone de texte : pas de spam
+	ui.texteAEnvoyer->clear();
 }
 
 //Reception et trie de tout message envoyer par le serveur
@@ -163,13 +190,13 @@ void ClientQT::onSocketReadyRead()
 	if (str == "LOK" || str == "NLOK")
 	{
 		ClientQT::receptionInfoLogin(str);
-	} else if (str == "MOK" || str == "NMOK")
-	{
-		ClientQT::receptionInfoMessage(str);
 	}
 	else if (str == "IOK" || str == "NIOK")
 	{
 		ClientQT::receptionInfoInscription(str);
+	} else
+	{
+		ClientQT::receptionInfoMessage(str);
 	}
 
 }
@@ -183,6 +210,8 @@ void ClientQT::deconnexion()
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
 	ui.labelBienvenueX->setVisible(false);
+	ui.Shellos->setVisible(false);
+	ui.Caterpie->setVisible(false);
 
 	//Afficehr le Formulaire
 	ui.connectVous->setVisible(true);
@@ -192,6 +221,7 @@ void ClientQT::deconnexion()
 	ui.lineMdP->setVisible(true);
 	ui.envoieInfoLogin->setVisible(true);
 	ui.buttonRedirectCreationUser->setVisible(true);
+
 }
 
 //Envoie vers formulaire inscription
@@ -248,7 +278,8 @@ void ClientQT::receptionInfoLogin(QString str)
 		ui.envoieMessage->setVisible(true);
 		ui.buttonDeconnexion->setVisible(true);
 		ui.labelBienvenueX->setVisible(true);
-
+		ui.Shellos->setVisible(true);
+		ui.Caterpie->setVisible(true);
 
 		//Cacher le Formulaire
 		ui.connectVous->setText("Connectez-vous");
@@ -260,8 +291,9 @@ void ClientQT::receptionInfoLogin(QString str)
 		ui.envoieInfoLogin->setVisible(false);
 		ui.buttonRedirectCreationUser->setVisible(false);
 		ui.labelErreur->setText("");
-		//Remplir le Chat (c est deugeulasse, putain de zoophile)
 
+		//Remplir le Chat (c est deugeulasse, putain de zoophile)
+		ClientQT::priseCentDernierMessage();
 	}
 	else if (str == "NLOK")
 	{
@@ -277,17 +309,9 @@ void ClientQT::receptionInfoLogin(QString str)
 //Reception des info de messages depuis le Serveur
 void ClientQT::receptionInfoMessage(QString str)
 {
-	//Si l'info recu correspond a celle attendu pour reception message : 
-	//Lancement de methode pour actualiser la messagerie
-	if (str == "MOK")
-	{
-
-
-
-	}
-
-	//Système de mot banni ?
-	//Affichage de message d erreur
+	//recuperer les messages envoyer par le monsieur
+	ui.texteRecu->setText(str);
+	//texteRecu
 }
 
 //Reception des info d'inscription depuis le Serveur
@@ -319,4 +343,11 @@ void ClientQT::receptionInfoInscription(QString str)
 	}
 
 	ui.envoieInfoLogin->setEnabled(true);
+}
+
+//Demande des 100 derniers messages stocker en base
+void ClientQT::priseCentDernierMessage()
+{
+	//On demande les 100 derniers messages depuis la BDD
+	socket->write("MSG100");
 }

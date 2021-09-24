@@ -36,5 +36,6 @@ class ClientQT : public QMainWindow
 		void receptionInfoLogin(QString);
 		void receptionInfoMessage(QString);
 		void receptionInfoInscription(QString);
+		void priseCentDernierMessage();
 
 };

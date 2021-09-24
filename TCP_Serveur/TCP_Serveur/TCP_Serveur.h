@@ -23,5 +23,6 @@ public slots:
 	void onServerNewConnection();
 	void onClientDisconnected();
 	void onClientReadyRead();
+	void ConnectionDataBase();
 	void Identification();
 };
