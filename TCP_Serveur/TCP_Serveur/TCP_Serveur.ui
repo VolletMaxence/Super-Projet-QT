@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>551</width>
-    <height>400</height>
+    <width>1001</width>
+    <height>698</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,10 +17,10 @@
    <widget class="QLabel" name="connectionStatusLabel">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>110</y>
-      <width>181</width>
-      <height>31</height>
+      <x>350</x>
+      <y>140</y>
+      <width>221</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -30,9 +30,9 @@
    <widget class="QLabel" name="Message">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>200</y>
-      <width>191</width>
+      <x>90</x>
+      <y>190</y>
+      <width>161</width>
       <height>41</height>
      </rect>
     </property>
@@ -40,13 +40,13 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="test">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>280</y>
-      <width>141</width>
-      <height>21</height>
+      <x>330</x>
+      <y>360</y>
+      <width>261</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="text">
@@ -55,14 +55,14 @@
    </widget>
    <zorder>Message</zorder>
    <zorder>connectionStatusLabel</zorder>
-   <zorder>test</zorder>
+   <zorder>label</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>551</width>
+     <width>1001</width>
      <height>21</height>
     </rect>
    </property>
@@ -87,7 +87,7 @@
   <slot>onClientReadyRead()</slot>
   <slot>onClientDisconnected()</slot>
   <slot>onSocketReadyRead()</slot>
-  <slot>Identification()</slot>
   <slot>ConnectionDataBase()</slot>
+  <slot>Login()</slot>
  </slots>
 </ui>

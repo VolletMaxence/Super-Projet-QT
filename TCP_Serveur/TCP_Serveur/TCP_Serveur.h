@@ -18,11 +18,13 @@ private:
     Ui::TCP_ServeurClass ui;
 	QTcpServer * server;
 	QTcpSocket * socket;
+	QString username;
+	QString password;
 
 public slots:
 	void onServerNewConnection();
 	void onClientDisconnected();
 	void onClientReadyRead();
 	void ConnectionDataBase();
-	void Identification();
+	void Login();
 };
