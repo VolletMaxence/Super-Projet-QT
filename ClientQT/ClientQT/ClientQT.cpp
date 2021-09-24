@@ -1,4 +1,5 @@
 #include "ClientQT.h"
+#include "qscrollbar.h"
 
 
 ClientQT::ClientQT(QWidget *parent)
@@ -10,6 +11,9 @@ ClientQT::ClientQT(QWidget *parent)
 	QObject::connect(socket, SIGNAL(disconnected()), this, SLOT(onSocketDisonnected()));
 	QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(onSocketReadyRead()));
 	//Connection au serveur au lancement
+
+	void setWindowIcon(const QIcon &icon);
+	QIcon windowIcon();
 
 	//Configuration Local
 	socket->connectToHost("127.0.0.1", 1234);
@@ -348,6 +352,9 @@ void ClientQT::receptionInfoInscription(QString str)
 //Demande des 100 derniers messages stocker en base
 void ClientQT::priseCentDernierMessage()
 {
+	//Mettre la scrollbar au maximum
+
+
 	//On demande les 100 derniers messages depuis la BDD
 	socket->write("MSG100");
 }
