@@ -116,4 +116,15 @@
     .DisplayOFF{
         display:none;
     }
-    input, button { border:none; } 
+    input, button{
+        border:none;
+    }
+/* Chat Texte */
+    .MePseudo{
+        text-decoration: underline;
+        color: green;
+    }
+    .OtherPseudo{
+        text-decoration: underline;
+        color: yellow;
+    }
