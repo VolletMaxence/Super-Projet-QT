@@ -1,9 +1,27 @@
     // Variables
-    var AuthChat;
+        var AuthChat;
 
-    // API
+    // Deffinition Variable CookieUser
+        if(typeof CookieUser !== 'undefined'){
+            var User_Pseudo = CookieUser['Pseudo'];
+            var User_ID = CookieUser['ID'];
+        }
+        else{
+            var User_Pseudo = "Default";
+            var User_ID = 0;
+        };
 
     // Chat JS
+        function SendMSG() {
+            // Récupérer l'input et sa valeur
+            var VMessage = document.getElementById('ChatArea').value;
+            // Envoyer la valeur
+            //window.alert('SEND : "SEND :: UserID :: ' + User_ID + ' Message : ' + VMessage + '"');
+            $('div .Chatbox').append(
+                "<p class='ChatTexte'><span class='MePseudo'>" + User_Pseudo + "</span> : " + VMessage + "</p>"
+            )
+        }
+
 
     // Fonctions
         function Affichage(AuthChat){
