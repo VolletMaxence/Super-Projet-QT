@@ -3,6 +3,7 @@
 #include <QSqlDatabase>
 
 
+
 TCP_Serveur::TCP_Serveur(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -11,9 +12,14 @@ TCP_Serveur::TCP_Serveur(QWidget *parent)
 	QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(onSocketReadyRead()));
 	server = new QTcpServer(this);
 	QObject::connect(server, SIGNAL(newConnection()), this, SLOT(onServerNewConnection()));
+	ConnectionDataBase();
+	Identification();
 	server->listen(QHostAddress::AnyIPv4, 4321);
+}
 
-	QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+void TCP_Serveur::ConnectionDataBase()
+{
+	QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 	db.setHostName("192.168.64.66");
 	db.setDatabaseName("QT");
 	db.setUserName("root");
@@ -44,7 +50,6 @@ void TCP_Serveur::onClientReadyRead()
 	QString str(data);
 
 	ui.Message->setText(str);
-
 }
 
 void TCP_Serveur::Identification()
@@ -53,8 +58,11 @@ void TCP_Serveur::Identification()
 	QByteArray data = obj->read(obj->bytesAvailable());
 	QString str(data);
 
-	if ()
+	for (int i = 0; i < str.size(); ++i)
 	{
-
+		if (str.at(i) >= QChar('::'))
+		{
+			ui.Message->setText("Salut");
+		}
 	}
 }
