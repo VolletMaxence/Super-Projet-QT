@@ -20,6 +20,9 @@
             $('div .Chatbox').append(
                 "<p class='ChatTexte'><span class='MePseudo'>" + User_Pseudo + "</span> : " + VMessage + "</p>"
             )
+            // ScrollBare Bottom
+            const scrollbarre = document.querySelector("div.Chatbox");
+            scrollbarre.scroll(scrollbarre.scrollTopMax, scrollbarre.scrollTopMax);
         }
 
 
