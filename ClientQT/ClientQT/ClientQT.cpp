@@ -22,6 +22,8 @@ ClientQT::ClientQT(QWidget *parent)
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
 	ui.labelBienvenueX->setVisible(false);
+	ui.Shellos->setVisible(false);
+
 	//On cache formulaire de connexion car on est pas sur d'être connecter
 	ui.connectVous->setVisible(false);
 	ui.labelPseudo->setVisible(false);
@@ -51,7 +53,6 @@ void ClientQT::onSocketConnected()
 	ui.lineMdP->setVisible(true);
 	ui.envoieInfoLogin->setVisible(true);
 	ui.buttonRedirectCreationUser->setVisible(true);
-
 }
 
 //Affiche le boutton pour se connecter si le serveur se coupe
@@ -63,6 +64,7 @@ void ClientQT::onSocketDisonnected()
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
 	ui.labelBienvenueX->setVisible(false);
+	ui.Shellos->setVisible(false);
 
 	ui.connectVous->setVisible(false);
 	ui.labelPseudo->setVisible(false);
@@ -71,6 +73,7 @@ void ClientQT::onSocketDisonnected()
 	ui.lineMdP->setVisible(false);
 	ui.envoieInfoLogin->setVisible(false);
 	ui.buttonRedirectCreationUser->setVisible(false);
+
 
 	ui.lineMdPInscription->setVisible(false);
 	ui.linePseudoInscription->setVisible(false);
@@ -205,6 +208,7 @@ void ClientQT::deconnexion()
 	ui.envoieMessage->setVisible(false);
 	ui.buttonDeconnexion->setVisible(false);
 	ui.labelBienvenueX->setVisible(false);
+	ui.Shellos->setVisible(false);
 
 	//Afficehr le Formulaire
 	ui.connectVous->setVisible(true);
@@ -214,6 +218,7 @@ void ClientQT::deconnexion()
 	ui.lineMdP->setVisible(true);
 	ui.envoieInfoLogin->setVisible(true);
 	ui.buttonRedirectCreationUser->setVisible(true);
+
 }
 
 //Envoie vers formulaire inscription
@@ -270,7 +275,7 @@ void ClientQT::receptionInfoLogin(QString str)
 		ui.envoieMessage->setVisible(true);
 		ui.buttonDeconnexion->setVisible(true);
 		ui.labelBienvenueX->setVisible(true);
-
+		ui.Shellos->setVisible(true);
 
 		//Cacher le Formulaire
 		ui.connectVous->setText("Connectez-vous");
