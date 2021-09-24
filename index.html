@@ -5,7 +5,6 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name='viewport' content='width=device-width, initial-scale=1.0'>
             <meta charset='UTF-8'>
-            <script type="text/javascript" src="chat.js"></script>
             <link rel='stylesheet' type='text/css' media='screen' href='index.css'>
             <title>Project Chat C++ / JS</title>
             <meta name='description' content='Project Chat C++ / JS - Chat'>
@@ -22,6 +21,7 @@
         <!-- Formulaire -->
             <link rel="stylesheet" href="src/jquery-ui.css">
             <link rel="stylesheet" href="src/style.css">
+            <script type="text/javascript" src="chat.js"></script>
             <script type="text/javascript" src="src/jquery-1.12.4.js"></script>
             <script type="text/javascript" src="src/jquery-ui.js"></script>
             <script type="text/javascript" src="src/script-ui.js"></script>
@@ -35,68 +35,16 @@
             </div>
         </nav>  
         <div id="AuthChatOn" class="Chat">
-            <div class="Div1 Chatbox">
-                <p class="ChatTexte">Texte.</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte.</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte.</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte.</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte.</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte.</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte.</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte.</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte.</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte Exemple</p>
-                <p class="ChatTexte">Texte.</p>
+            <div class="Div1 Chatbox">  
+                <script>
+                    document.write("<p class='ChatBefore'>Bienvenue <span class='MePseudo'>" + User_Pseudo + "</span>.</p>")
+                </script>
             </div>
             <div class="Div1 DivSendSMG">
                 <form method="post" action="" enctype="multipart/form-data" class="FormSendMSG">
-                    <textarea class="ChatArea"></textarea>
-                    <input type="file" id="IMG" name="Image" accept="image/png, image/jpeg, image/jpg">
-                    <input type="submit" value="SubmitSendMSG">
+                    <textarea id="ChatArea"></textarea>
+                    <!-- <input type="file" id="IMG" name="Image" accept="image/png, image/jpeg, image/jpg"> -->
+                    <button type="button" onclick="SendMSG()" class="SendMSG">Envoyer</button>
                 </form>
             </div>
         </div> 
@@ -140,10 +88,10 @@
     </body>
     <script>
         if(typeof CookieUser !== 'undefined'){
-            Affichage(1);
+            Affichage(0);
         }
         else{
-            Affichage(0);
+            Affichage(1);
         };
     </script>
 </html>
