@@ -27,37 +27,19 @@
      <string>Envoi Message</string>
     </property>
    </widget>
-   <widget class="QPlainTextEdit" name="texteAEnvoyer">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>370</y>
-      <width>401</width>
-      <height>71</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="texteRecu">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>461</width>
-      <height>521</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Texte Recu</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="connectVous">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>390</x>
       <y>130</y>
-      <width>81</width>
+      <width>131</width>
       <height>61</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Connectez-vous.</string>
@@ -72,6 +54,9 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="maxLength">
+     <number>20</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineMdP">
     <property name="geometry">
@@ -85,6 +70,9 @@
     <property name="contextMenuPolicy">
      <enum>Qt::DefaultContextMenu</enum>
     </property>
+    <property name="maxLength">
+     <number>20</number>
+    </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
     </property>
@@ -92,11 +80,16 @@
    <widget class="QLabel" name="labelPseudo">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>260</x>
       <y>210</y>
-      <width>51</width>
+      <width>61</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Pseudo : </string>
@@ -105,11 +98,16 @@
    <widget class="QLabel" name="labelMdP">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>220</x>
       <y>270</y>
-      <width>71</width>
+      <width>111</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Mot de Passe : </string>
@@ -157,6 +155,11 @@
       <width>331</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Bienvenue.</string>
@@ -217,6 +220,9 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="maxLength">
+     <number>20</number>
+    </property>
    </widget>
    <widget class="QLineEdit" name="lineMdPInscription">
     <property name="geometry">
@@ -226,6 +232,9 @@
       <width>171</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="maxLength">
+     <number>20</number>
     </property>
    </widget>
    <widget class="QPushButton" name="inscriptionCompte">
@@ -263,13 +272,82 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="text">
      <string/>
     </property>
    </widget>
-   <zorder>envoieMessage</zorder>
-   <zorder>texteAEnvoyer</zorder>
+   <widget class="QLineEdit" name="texteAEnvoyer">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>370</y>
+      <width>401</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="maxLength">
+     <number>200</number>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="texteRecu">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>481</width>
+      <height>521</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Shellos">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>60</y>
+      <width>361</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../Image/1513971351.cyberblue_image - Copie.jpeg</pixmap>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Caterpie">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>450</y>
+      <width>211</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>E:/Image/14oxf6i8ch351.png</pixmap>
+    </property>
+   </widget>
    <zorder>texteRecu</zorder>
+   <zorder>envoieMessage</zorder>
    <zorder>connectVous</zorder>
    <zorder>linePseudo</zorder>
    <zorder>lineMdP</zorder>
@@ -286,6 +364,9 @@
    <zorder>inscriptionCompte</zorder>
    <zorder>buttonRetour</zorder>
    <zorder>labelErreur</zorder>
+   <zorder>texteAEnvoyer</zorder>
+   <zorder>Shellos</zorder>
+   <zorder>Caterpie</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -348,7 +429,7 @@
    <sender>envoieMessage</sender>
    <signal>clicked()</signal>
    <receiver>ClientQTClass</receiver>
-   <slot>connexionServeur()</slot>
+   <slot>envoieMessage()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>785</x>
@@ -408,6 +489,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>inscriptionCompte</sender>
+   <signal>clicked()</signal>
+   <receiver>ClientQTClass</receiver>
+   <slot>envoieInscription()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>450</x>
+     <y>443</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>441</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>connectionClientServeur()</slot>
@@ -416,5 +513,7 @@
   <slot>connexionServeur()</slot>
   <slot>redirectInscription()</slot>
   <slot>retourConnexion()</slot>
+  <slot>envoieMessage()</slot>
+  <slot>envoieInscription()</slot>
  </slots>
 </ui>
