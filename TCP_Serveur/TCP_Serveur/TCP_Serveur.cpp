@@ -52,5 +52,15 @@ void TCP_Serveur::onClientReadyRead()
 
 void TCP_Serveur::Login()
 {
-	
+	QTcpSocket * obj = qobject_cast<QTcpSocket*>(sender());
+	QByteArray data = obj->read(obj->bytesAvailable());
+	QString str(data);
+
+	QRegExp rx("[a - zA - Z] + [a - z]\w +");
+
+	QString strr(rx);
+
+	if(rx == "LOGIN"){
+
+	}
 }
