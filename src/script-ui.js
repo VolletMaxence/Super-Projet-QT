@@ -15,16 +15,18 @@ $(function(){
         var co_tips = $(".co_validateTips");
 
     // Ouverture des Dialogs
-        $("#create_user").button().on("click", function(){
-            in_dialog.dialog("open");
-        });
-        $("#connect_user").button().on("click", function(){
-            co_dialog.dialog("open");
-        });
+        // Créer User
+            $("#create_user").button().on("click", function(){
+                in_dialog.dialog("open");
+            });
+        // Se connecter
+            $("#connect_user").button().on("click", function(){
+                co_dialog.dialog("open");
+            });
         // UnLogin
-        $("#unlogin_user").button().on("click", function(){
-            unlogin();
-        });
+            $("#unlogin_user").button().on("click", function(){
+                unlogin();
+            });
 
     // Fonction Suivant Inscription Bouton
         function IN_User(){
@@ -41,8 +43,10 @@ $(function(){
                 var IN_Pseudo   =   in_name.val();
                 var IN_PassWord =   in_password.val();
                 in_dialog.dialog("close");
-                window.alert('Le Pseudo est \"' + IN_Pseudo + '\" et le Mots de Passe est \"'+ IN_PassWord + '\".');
-                window.alert('INSCRIPTION : "INSCRIPTION :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
+                // Affichage afin de vérifier - tester
+                    window.alert('Le Pseudo est \"' + IN_Pseudo + '\" et le Mots de Passe est \"'+ IN_PassWord + '\".');
+                // Requettes à envoyer
+                    window.alert('INSCRIPTION : "INSCRIPTION :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
             };
             return valid;
         };
@@ -63,9 +67,9 @@ $(function(){
                     var CO_PassWord =   co_password.val();
                     co_dialog.dialog("close");
                     // Affichage afin de vérifier - tester
-                    window.alert('Le Pseudo est \"' + CO_Pseudo + '\" et le Mots de Passe est \"'+ CO_PassWord + '\".');
+                        window.alert('Le Pseudo est \"' + CO_Pseudo + '\" et le Mots de Passe est \"'+ CO_PassWord + '\".');
                     // Requettes à envoyer
-                    window.alert('LOGIN : "LOGIN :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
+                        window.alert('LOGIN : "LOGIN :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
                 };
                 return valid;
         };
