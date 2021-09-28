@@ -127,6 +127,7 @@ void ClientQT::envoieInfoConnexion()
 		//Envoie des infos entré dans formulaire : 
 		socket->write("LOGIN");
 		socket->write(PseudoEncode);
+		socket->write("MDP");
 		socket->write(MdPEncode);
 		//socket->write("LOGIN " + PseudoEncode + " " + MdPEncode);
 	}
@@ -315,6 +316,7 @@ void ClientQT::receptionInfoMessage(QString str)
 {
 	//recuperer les messages envoyer par le monsieur
 	ui.texteRecu->setText(str);
+	ui.texteRecu->verticalScrollBar()->setValue(ui.texteRecu->verticalScrollBar()->maximum());
 	//texteRecu
 }
 
