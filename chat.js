@@ -12,36 +12,45 @@
         };
 
     // Chat JS
-        function SendMSG() {
+        function SendMSG(){
             // Récupérer l'input et sa valeur
             var VMessage = document.getElementById('ChatArea').value;
-            // Envoyer la valeur
-            //window.alert('SEND : "SEND :: UserID :: ' + User_ID + ' Message : ' + VMessage + '"');
-            $('div .Chatbox').append(
-                "<p class='ChatTexte'><span class='MePseudo'>" + User_Pseudo + "</span> : " + VMessage + "</p>"
-            )
-            // ScrollBare Bottom
-            const scrollbarre = document.querySelector("div.Chatbox");
-            scrollbarre.scroll(scrollbarre.scrollTopMax, scrollbarre.scrollTopMax);
+            //if(VMessage ==! ''){
+                // Envoyer la valeur
+                //window.alert('SEND : "SEND :: UserID :: ' + User_ID + ' Message : ' + VMessage + '"');
+                $('div .Chatbox').append(
+                    "<p class='ChatTexte'><span class='MePseudo'>" + User_Pseudo + "</span> : " + VMessage + "</p>"
+                )
+                // ScrollBare Bottom
+                const scrollbarre = document.querySelector("div.Chatbox");
+                scrollbarre.scroll(scrollbarre.scrollTopMax, scrollbarre.scrollTopMax);
+                // Vider Champs texte
+                $('#ChatArea').val('');
+            //}
+            //else{
+            //    window.alert('Vous ne pouvez pas envoyer un message vide.');
+            //}
         }
 
 
     // Fonctions
         function Affichage(AuthChat){
-            if(AuthChat == 1){
-                document.getElementById('unlogin_user').className = "Sous-Menu-1 DisplayON";
-                document.getElementById('connect_user').className = "Sous-Menu-1 DisplayOFF";
-                document.getElementById('create_user').className = "Sous-Menu-1 DisplayOFF";
-                document.getElementById('AuthChatOn').className = "Chat DisplayON";
-                document.getElementById('AuthChatOff').className = "Chat DisplayOFF";
-            }
-            else{
-                document.getElementById('unlogin_user').className = "Sous-Menu-1 DisplayOFF";
-                document.getElementById('connect_user').className = "Sous-Menu-1 DisplayON";
-                document.getElementById('create_user').className = "Sous-Menu-1 DisplayON";
-                document.getElementById('AuthChatOn').className = "Chat DisplayOFF";
-                document.getElementById('AuthChatOff').className = "Chat DisplayON";
-            }
+            // Si connecté
+                if(AuthChat == 0){
+                    document.getElementById('unlogin_user').className = "Sous-Menu-1 DisplayON";
+                    document.getElementById('connect_user').className = "Sous-Menu-1 DisplayOFF";
+                    document.getElementById('create_user').className = "Sous-Menu-1 DisplayOFF";
+                    document.getElementById('AuthChatOn').className = "Chat DisplayON";
+                    document.getElementById('AuthChatOff').className = "Chat DisplayOFF";
+                }
+            // Si Pas connecté
+                else{
+                    document.getElementById('unlogin_user').className = "Sous-Menu-1 DisplayOFF";
+                    document.getElementById('connect_user').className = "Sous-Menu-1 DisplayON";
+                    document.getElementById('create_user').className = "Sous-Menu-1 DisplayON";
+                    document.getElementById('AuthChatOn').className = "Chat DisplayOFF";
+                    document.getElementById('AuthChatOff').className = "Chat DisplayON";
+                }
         }
         // Fonction contact Serveur
         function ContactServer(content){

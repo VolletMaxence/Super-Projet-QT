@@ -14,17 +14,19 @@ $(function(){
         var co_allFields = $([]).add(co_name).add(co_password);
         var co_tips = $(".co_validateTips");
 
-    // Ouverture des Dialog
-        $("#create_user").button().on("click", function(){
-            in_dialog.dialog("open");
-        });
-        $("#connect_user").button().on("click", function(){
-            co_dialog.dialog("open");
-        });
+    // Ouverture des Dialogs
+        // Créer User
+            $("#create_user").button().on("click", function(){
+                in_dialog.dialog("open");
+            });
+        // Se connecter
+            $("#connect_user").button().on("click", function(){
+                co_dialog.dialog("open");
+            });
         // UnLogin
-        $("#unlogin_user").button().on("click", function(){
-            unlogin();
-        });
+            $("#unlogin_user").button().on("click", function(){
+                unlogin();
+            });
 
     // Fonction Suivant Inscription Bouton
         function IN_User(){
@@ -41,8 +43,10 @@ $(function(){
                 var IN_Pseudo   =   in_name.val();
                 var IN_PassWord =   in_password.val();
                 in_dialog.dialog("close");
-                window.alert('Le Pseudo est \"' + IN_Pseudo + '\" et le Mots de Passe est \"'+ IN_PassWord + '\".');
-                window.alert('INSCRIPTION : "INSCRIPTION :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
+                // Affichage afin de vérifier - tester
+                    window.alert('Le Pseudo est \"' + IN_Pseudo + '\" et le Mots de Passe est \"'+ IN_PassWord + '\".');
+                // Requettes à envoyer
+                    window.alert('INSCRIPTION : "INSCRIPTION :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
             };
             return valid;
         };
@@ -51,21 +55,23 @@ $(function(){
         function Co_User(){
             var valid = true;
             co_allFields.removeClass("ui-state-error");
-
-            valid = valid && co_checkLength(co_name, "username", 3, 16);
-            valid = valid && co_checkLength(co_password, "password", 5, 16);
-
-            valid = valid && co_checkRegexp(co_name, /^[a-z]([0-9a-z_\s])+$/i, "Le nom d'utilisateur ne peut-être que composé de chiffres, de lettres, d'underscores, d'espaces, et doit commencer par une lettre.");
-            valid = valid && co_checkRegexp(co_password, /^([0-9a-zA-Z])+$/, "Le mot de passe n'autorise que des chiffres et des lettres.");
-
-            if(valid){
-                var CO_Pseudo   =   co_name.val();
-                var CO_PassWord =   co_password.val();
-                co_dialog.dialog("close");
-                window.alert('Le Pseudo est \"' + CO_Pseudo + '\" et le Mots de Passe est \"'+ CO_PassWord + '\".');
-                window.alert('LOGIN : "LOGIN :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
-            };
-            return valid;
+            // Vérifie que les valeurs sont entre un minimums et un maximums de caractères
+                valid = valid && co_checkLength(co_name, "username", 3, 16);
+                valid = valid && co_checkLength(co_password, "password", 5, 16);
+            // Vérification qu'il n'y a pas de carractères spéciaux non autorisé
+                valid = valid && co_checkRegexp(co_name, /^[a-z]([0-9a-z_\s])+$/i, "Le nom d'utilisateur ne peut-être que composé de chiffres, de lettres, d'underscores, d'espaces, et doit commencer par une lettre.");
+                valid = valid && co_checkRegexp(co_password, /^([0-9a-zA-Z])+$/, "Le mot de passe n'autorise que des chiffres et des lettres.");
+            // Si tout est validé
+                if(valid){
+                    var CO_Pseudo   =   co_name.val();
+                    var CO_PassWord =   co_password.val();
+                    co_dialog.dialog("close");
+                    // Affichage afin de vérifier - tester
+                        window.alert('Le Pseudo est \"' + CO_Pseudo + '\" et le Mots de Passe est \"'+ CO_PassWord + '\".');
+                    // Requettes à envoyer
+                        window.alert('LOGIN : "LOGIN :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
+                };
+                return valid;
         };
 
     // Fonction sur la Boite Dialogue Inscription
@@ -89,31 +95,34 @@ $(function(){
             event.preventDefault();
             IN_User();
         });
-        function in_updateTips(t){
-            in_tips.text(t).addClass("ui-state-highlight");
-            setTimeout(function(){
-                in_tips.removeClass("ui-state-highlight", 1500);
-            }, 500);
-        };
-        function in_checkLength(o, n, min, max){
-            if(o.val().length > max || o.val().length < min){
-                o.addClass("ui-state-error");
-                in_updateTips("Longueur de " + n + " doit être entre " +
-                min + " et " + max + ".");
-                return false;
-            }else{
-                return true;
-            }
-        };
-        function in_checkRegexp(o, regexp, n){
-            if(!(regexp.test(o.val()))){
-                o.addClass("ui-state-error");
-                in_updateTips(n);
-                return false;
-            }else{
-                return true;
-            }
-        };
+        // Fonction Update du (Fenetre Co/Ins)
+            function in_updateTips(t){
+                in_tips.text(t).addClass("ui-state-highlight");
+                setTimeout(function(){
+                    in_tips.removeClass("ui-state-highlight", 1500);
+                }, 500);
+            };
+        // Fonction vérifiant la taille
+            function in_checkLength(o, n, min, max){
+                if(o.val().length > max || o.val().length < min){
+                    o.addClass("ui-state-error");
+                    in_updateTips("Longueur de " + n + " doit être entre " +
+                    min + " et " + max + ".");
+                    return false;
+                }else{
+                    return true;
+                }
+            };
+        // Fonctionant vérifiant caractères spéciaux.
+            function in_checkRegexp(o, regexp, n){
+                if(!(regexp.test(o.val()))){
+                    o.addClass("ui-state-error");
+                    in_updateTips(n);
+                    return false;
+                }else{
+                    return true;
+                }
+            };
 
     // Fonction sur la Boite Dialogue Connexion
         co_dialog = $("#dialog_connect").dialog({

@@ -1,4 +1,5 @@
 #include "ClientQT.h"
+#include "qscrollbar.h"
 
 
 ClientQT::ClientQT(QWidget *parent)
@@ -10,6 +11,9 @@ ClientQT::ClientQT(QWidget *parent)
 	QObject::connect(socket, SIGNAL(disconnected()), this, SLOT(onSocketDisonnected()));
 	QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(onSocketReadyRead()));
 	//Connection au serveur au lancement
+
+	void setWindowIcon(const QIcon &icon);
+	QIcon windowIcon();
 
 	//Configuration Local
 	socket->connectToHost("127.0.0.1", 1234);
@@ -121,9 +125,8 @@ void ClientQT::envoieInfoConnexion()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("LOGIN");
-		socket->write(PseudoEncode);
-		socket->write(MdPEncode);
+		socket->write("LOGIN :: Pseudo :: "+ PseudoEncode +" MDP : "+MdPEncode);
+
 		//socket->write("LOGIN " + PseudoEncode + " " + MdPEncode);
 	}
 	//Faire vérification à partir de serveur, recevoir la reponse pour afficher ou non le chat
@@ -149,9 +152,7 @@ void ClientQT::envoieInscription()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("INSCRIPTION");
-		socket->write(InscriptionPseudoEncode);
-		socket->write(InscriptionMdPEncode);
+		socket->write("Inscription :: Pseudo :: " + InscriptionPseudoEncode + " MDP : " + InscriptionMdPEncode);
 		//socket->write("INSCRIPTION " + InscriptionPseudoEncode + " " + InscriptionMdPEncode);
 	}
 }
@@ -311,6 +312,7 @@ void ClientQT::receptionInfoMessage(QString str)
 {
 	//recuperer les messages envoyer par le monsieur
 	ui.texteRecu->setText(str);
+	ui.texteRecu->verticalScrollBar()->setValue(ui.texteRecu->verticalScrollBar()->maximum());
 	//texteRecu
 }
 
@@ -348,6 +350,9 @@ void ClientQT::receptionInfoInscription(QString str)
 //Demande des 100 derniers messages stocker en base
 void ClientQT::priseCentDernierMessage()
 {
+	//Mettre la scrollbar au maximum
+
+
 	//On demande les 100 derniers messages depuis la BDD
 	socket->write("MSG100");
 }

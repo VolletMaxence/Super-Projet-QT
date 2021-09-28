@@ -27,13 +27,15 @@
             <script type="text/javascript" src="src/script-ui.js"></script>
     </head>
     <body>
+        <!-- Menu -->
         <nav class="Menu-Nav">
             <div class="Menu">
                 <li id="unlogin_user" class="Sous-Menu-1"><a href="#">Se Déconnecter</a></li>
                 <li id="connect_user" class="Sous-Menu-1"><a href="#">Se Connecter</a></li>
                 <li id="create_user" class="Sous-Menu-1"><a href="#">S'inscrire</a></li>
             </div>
-        </nav>  
+        </nav>
+        <!-- ChatBox -->
         <div id="AuthChatOn" class="Chat">
             <div class="Div1 Chatbox">  
                 <script>
@@ -43,11 +45,11 @@
             <div class="Div1 DivSendSMG">
                 <form method="post" action="" enctype="multipart/form-data" class="FormSendMSG">
                     <textarea id="ChatArea"></textarea>
-                    <!-- <input type="file" id="IMG" name="Image" accept="image/png, image/jpeg, image/jpg"> -->
                     <button type="button" onclick="SendMSG()" class="SendMSG">Envoyer</button>
                 </form>
             </div>
-        </div> 
+        </div>
+        <!-- Div si non connecté -->
         <div id="AuthChatOff" class="Chat">
             <div class="Div1 BoxNoConnect">
                 <p class="NoConnect">Connectez-vous avant de pouvoir communiquer.</p>
@@ -87,11 +89,12 @@
             </div>
     </body>
     <script>
-        if(typeof CookieUser !== 'undefined'){
-            Affichage(0);
-        }
-        else{
-            Affichage(1);
-        };
+        // Définition du Cookie en attendant serveur
+            if(typeof CookieUser !== 'undefined'){
+                Affichage(0);
+            }
+            else{
+                Affichage(1);
+            };
     </script>
 </html>
