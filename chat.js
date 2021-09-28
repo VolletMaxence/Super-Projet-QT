@@ -12,17 +12,24 @@
         };
 
     // Chat JS
-        function SendMSG() {
+        function SendMSG(){
             // Récupérer l'input et sa valeur
             var VMessage = document.getElementById('ChatArea').value;
-            // Envoyer la valeur
-            //window.alert('SEND : "SEND :: UserID :: ' + User_ID + ' Message : ' + VMessage + '"');
-            $('div .Chatbox').append(
-                "<p class='ChatTexte'><span class='MePseudo'>" + User_Pseudo + "</span> : " + VMessage + "</p>"
-            )
-            // ScrollBare Bottom
-            const scrollbarre = document.querySelector("div.Chatbox");
-            scrollbarre.scroll(scrollbarre.scrollTopMax, scrollbarre.scrollTopMax);
+            if(VMessage ==! ''){
+                // Envoyer la valeur
+                //window.alert('SEND : "SEND :: UserID :: ' + User_ID + ' Message : ' + VMessage + '"');
+                $('div .Chatbox').append(
+                    "<p class='ChatTexte'><span class='MePseudo'>" + User_Pseudo + "</span> : " + VMessage + "</p>"
+                )
+                // ScrollBare Bottom
+                const scrollbarre = document.querySelector("div.Chatbox");
+                scrollbarre.scroll(scrollbarre.scrollTopMax, scrollbarre.scrollTopMax);
+                // Vider Champs texte
+                $('#ChatArea').val('');
+            }
+            else{
+                window.alert('Vous ne pouvez pas envoyer un message vide.');
+            }
         }
 
 
