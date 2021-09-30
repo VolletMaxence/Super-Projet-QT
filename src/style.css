@@ -39,6 +39,10 @@ div#users-contain table td, div#users-contain table th{
 	padding:.6em 10px;
 	text-align:left;
 }
+#ChatArea{
+	width:99%;
+	height:15px;
+}
 .ui-dialog .ui-state-error{
 	padding:.3em;
 }
