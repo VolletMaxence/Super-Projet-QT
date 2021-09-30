@@ -55,36 +55,31 @@ void TCP_Serveur::onClientReadyRead()
 	QRegExp rx("\\b(LOGIN|INSCRIPTION|MSG100)\\b");
 	rx.indexIn(str);  
 
+
 	//QRegExp rx("^(.+) :: Pseudo :: (.+) MDP : (.+)");
 	//QStringList test = rx.capturedTexts();
 	//qDebug() << test[0];
 
 	int pos = rx.indexIn(str);
-	if (pos > -1) {
+	if (pos > -1) 
+	{
 		QString Info = rx.cap(1); // Info de ce qui est demander
 
 		//QString Pseudo = rx.cap(2); 
 		//QString MdP = rx.cap(3);
 
-		ui.Message->setText(Info);
 
 		if (Info == "LOGIN")
 		{
-			QRegExp rxL("^LOGIN :: Pseudo :: (.+) MDP : (.+)");
+			//QRegExp rxL("^LOGIN :: Pseudo ::([^\t]+)MDP :([^\t]+)");
 
-			//QRegExp rx("^(.+) :: Pseudo :: (.+) MDP : (.+)");
-			//QStringList test = rx.capturedTexts();
-			//qDebug() << test[0];
-
-			int posL = rxL.indexIn(str);
-			if (posL > -1) 
-			{
-				QString Pseudo = rxL.cap(1); //Pseudo rentré
-				QString MdP = rxL.cap(2); //MdP rentré
-
-				ui.Message->setText(Pseudo);
+			QString Pseudo, MDP;
+			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
+			if (rxL.indexIn(str) != -1) {
+				Pseudo = rxL.cap(2);
+				MDP = rxL.cap(4);
 			}
-
+	
 
 		}
 		else if (rx.exactMatch("INSCRIPTION"))
