@@ -11,18 +11,36 @@
             var User_ID = 0;
         };
 
-    // Chat JS
+    // Chat JS : Recevoir un Message
+    function ReceiveMSG(Receive_Pseudo,VMessage,VTime){
+        if(Receive_Pseudo === User_Pseudo){
+            // Ne rien Faire.
+        }
+        else{
+            // Écrire la valeur
+            $('div .Chatbox').append(
+                "<p class='ChatTexte'><span class='Time'>[" + VTime + "]</span> | <span class='OtherPseudo'>" + Receive_Pseudo + "</span> : " + VMessage + "</p>"
+            )
+            // ScrollBare Bottom
+            const scrollbarre = document.querySelector("div.Chatbox");
+            scrollbarre.scroll(scrollbarre.scrollTopMax, scrollbarre.scrollTopMax);
+        }
+    }
+
+    // Chat JS : Envoyer un Message
         function SendMSG(){
             // Récupérer l'input et sa valeur
             var VMessage = document.getElementById('ChatArea').value;
+
             if(VMessage === ''){
                 window.alert('Vous ne pouvez pas envoyer un message vide.');
             }
             else{
                 // Envoyer la valeur
-                //window.alert('SEND : "SEND :: UserID :: ' + User_ID + ' Message : ' + VMessage + '"');
+                    // window.alert('SEND : "SEND :: UserID :: ' + User_ID + ' Message : ' + VMessage + '"');
+                // Écrire la valeur
                 $('div .Chatbox').append(
-                    "<p class='ChatTexte'><span class='MePseudo'>" + User_Pseudo + "</span> : " + VMessage + "</p>"
+                    "<p class='ChatTexte'><span class='Time'>[" + HeureDynamique + "]</span> | <span class='MePseudo'>" + User_Pseudo + "</span> : " + VMessage + "</p>"
                 )
                 // ScrollBare Bottom
                 const scrollbarre = document.querySelector("div.Chatbox");
