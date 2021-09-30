@@ -26,5 +26,5 @@ public slots:
 	void onClientDisconnected();
 	void onClientReadyRead();
 	void ConnectionDataBase();
-	void Login();
+	//void Login();
 };
