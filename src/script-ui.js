@@ -46,7 +46,7 @@ $(function(){
                 // Affichage afin de vérifier - tester
                     window.alert('Le Pseudo est \"' + IN_Pseudo + '\" et le Mots de Passe est \"'+ IN_PassWord + '\".');
                 // Requettes à envoyer
-                    window.alert('INSCRIPTION : "INSCRIPTION :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
+                    window.alert('INSCRIPTION : "INSCRIPTION :: Pseudo :: IN_Pseudo :: MdP : IN_PassWord "');
             };
             return valid;
         };
@@ -69,7 +69,7 @@ $(function(){
                     // Affichage afin de vérifier - tester
                         window.alert('Le Pseudo est \"' + CO_Pseudo + '\" et le Mots de Passe est \"'+ CO_PassWord + '\".');
                     // Requettes à envoyer
-                        window.alert('LOGIN : "LOGIN :: Pseudo :: IN_Pseudo MdP : IN_PassWord "');
+                        window.alert('LOGIN : "LOGIN :: Pseudo :: IN_Pseudo :: MdP : IN_PassWord "');
                 };
                 return valid;
         };
