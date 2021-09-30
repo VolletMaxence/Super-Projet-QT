@@ -125,10 +125,8 @@ void ClientQT::envoieInfoConnexion()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("LOGIN");
-		socket->write(PseudoEncode);
-		socket->write("MDP");
-		socket->write(MdPEncode);
+		socket->write("LOGIN :: Pseudo :: "+ PseudoEncode +" MDP : "+MdPEncode);
+
 		//socket->write("LOGIN " + PseudoEncode + " " + MdPEncode);
 	}
 	//Faire vérification à partir de serveur, recevoir la reponse pour afficher ou non le chat
@@ -154,9 +152,7 @@ void ClientQT::envoieInscription()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("INSCRIPTION");
-		socket->write(InscriptionPseudoEncode);
-		socket->write(InscriptionMdPEncode);
+		socket->write("Inscription :: Pseudo :: " + InscriptionPseudoEncode + " MDP : " + InscriptionMdPEncode);
 		//socket->write("INSCRIPTION " + InscriptionPseudoEncode + " " + InscriptionMdPEncode);
 	}
 }
