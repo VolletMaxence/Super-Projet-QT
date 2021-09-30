@@ -55,3 +55,29 @@
         function ContactServer(content){
             // Envoyer Variable
         }
+
+    // DateTime : Heure Dynamique
+        function DateTime(){
+            date = new Date;
+            heure = date.getHours();
+            min = date.getMinutes();
+            sec = date.getSeconds();
+            if (sec < 10)
+                sec0 = "0";
+            else
+                sec0 = "";
+            if (min < 10)
+                min0 = "0";
+            else
+                min0 = "";
+            if (heure < 10)
+                heure0 = "0";
+            else
+                heure0 = "";
+            HeureDynamique = heure0 + heure + ":" + min0 + min + ":" + sec0 + sec;
+            if (document.getElementById){
+                document.getElementById("DateTime").innerHTML=HeureDynamique;
+            }
+            setTimeout("DateTime()", 1000)
+        }
+        window.onload = DateTime;
