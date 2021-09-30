@@ -1,9 +1,13 @@
 #include "TCP_Serveur.h"
 #include <qdebug.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <qregularexpression.h>
 #include <QRegExp>
+#include <QByteArray.h> 
 
 TCP_Serveur::TCP_Serveur(QWidget *parent)
     : QMainWindow(parent)
@@ -13,19 +17,7 @@ TCP_Serveur::TCP_Serveur(QWidget *parent)
 	QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(onSocketReadyRead()));
 	server = new QTcpServer(this);
 	QObject::connect(server, SIGNAL(newConnection()), this, SLOT(onServerNewConnection()));
-
-	ConnectionDataBase();
 	server->listen(QHostAddress::AnyIPv4, 4321);
-}
-
-void TCP_Serveur::ConnectionDataBase()
-{
-	QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-	db.setHostName("192.168.64.66");
-	db.setDatabaseName("QT");
-	db.setUserName("root");
-	db.setPassword("root");
-	bool ok = db.open();
 }
 
 void TCP_Serveur::onServerNewConnection()
@@ -75,11 +67,30 @@ void TCP_Serveur::onClientReadyRead()
 
 			QString Pseudo, MDP;
 			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
-			if (rxL.indexIn(str) != -1) {
+			if (rxL.indexIn(str) != -1) 
+			{
 				Pseudo = rxL.cap(2);
 				MDP = rxL.cap(4);
+
+				QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+				db.setHostName("192.168.64.66");
+				db.setDatabaseName("QT");
+				db.setUserName("root");
+				db.setPassword("root");
+				bool ok = db.open();
+				QSqlQuery query(db);
+
+				query.exec("SELECT Pseudo, MDP FROM User");
+				QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
+				retour = query.exec(requete);
+
+				if (retour) {
+
+				}
+				else {
+
+				}
 			}
-	
 
 		}
 		else if (rx.exactMatch("INSCRIPTION"))
@@ -98,9 +109,6 @@ void TCP_Serveur::onClientReadyRead()
 
 	// Pseudo :: (.+) MDP : (.+) = e qui donne group Pseudo / mdp
 	// ^LOGIN :: 
-
-
-	
 
 }
 /*

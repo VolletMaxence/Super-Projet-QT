@@ -5,6 +5,7 @@
 #include <qtcpserver.h>
 #include <qtcpsocket.h>
 #include <qtwidgets>
+#include <qsqlquery.h>
 
 class TCP_Serveur : public QMainWindow
 {
@@ -12,6 +13,7 @@ class TCP_Serveur : public QMainWindow
 
 public:
     TCP_Serveur(QWidget *parent = Q_NULLPTR);
+	char retour;
 
 private:
 	
@@ -20,11 +22,10 @@ private:
 	QTcpSocket * socket;
 	QString username;
 	QString password;
+	QSqlQuery db;
 
 public slots:
 	void onServerNewConnection();
 	void onClientDisconnected();
 	void onClientReadyRead();
-	void ConnectionDataBase();
-	//void Login();
 };
