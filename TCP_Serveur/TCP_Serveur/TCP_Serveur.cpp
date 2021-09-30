@@ -85,10 +85,10 @@ void TCP_Serveur::onClientReadyRead()
 				retour = query.exec(requete);
 
 				if (retour) {
-
+					obj->write("LOK");
 				}
 				else {
-
+					obj->write("NLOK");
 				}
 			}
 
