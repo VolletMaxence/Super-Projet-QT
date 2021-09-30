@@ -16,9 +16,9 @@ ClientQT::ClientQT(QWidget *parent)
 	QIcon windowIcon();
 
 	//Configuration Local
-	socket->connectToHost("127.0.0.1", 1234);
+	//socket->connectToHost("127.0.0.1", 1234);
 	//Configuration Serveur
-	//socket->connectToHost("192.168.64.107", 4321);
+	socket->connectToHost("192.168.64.107", 4321);
 
 	//On cache la partit "chat" au lancement pour ne voir que le formulaire de connection
 	ui.texteRecu->setVisible(false);
@@ -125,7 +125,7 @@ void ClientQT::envoieInfoConnexion()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("LOGIN :: Pseudo :: "+ PseudoEncode +" MDP : "+MdPEncode);
+		socket->write("LOGIN :: Pseudo :: "+ PseudoEncode +" :: MDP : "+MdPEncode);
 
 		//socket->write("LOGIN " + PseudoEncode + " " + MdPEncode);
 	}
@@ -152,7 +152,7 @@ void ClientQT::envoieInscription()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("Inscription :: Pseudo :: " + InscriptionPseudoEncode + " MDP : " + InscriptionMdPEncode);
+		socket->write("Inscription :: Pseudo :: " + InscriptionPseudoEncode + " :: MDP : " + InscriptionMdPEncode);
 		//socket->write("INSCRIPTION " + InscriptionPseudoEncode + " " + InscriptionMdPEncode);
 	}
 }
