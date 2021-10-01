@@ -5,7 +5,8 @@
 #include <qtcpserver.h>
 #include <qtcpsocket.h>
 #include <qtwidgets>
-#include <qsqlquery.h>
+#include <QtSql/QtSql>
+#include <QSqlQuery>
 
 class TCP_Serveur : public QMainWindow
 {
@@ -14,6 +15,7 @@ class TCP_Serveur : public QMainWindow
 public:
     TCP_Serveur(QWidget *parent = Q_NULLPTR);
 	char retour;
+	char requete;
 
 private:
 	

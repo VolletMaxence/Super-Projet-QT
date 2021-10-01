@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <QSqlDatabase>
-#include <QSqlQuery>
 #include <qregularexpression.h>
 #include <QRegExp>
 #include <QByteArray.h> 
@@ -67,7 +65,7 @@ void TCP_Serveur::onClientReadyRead()
 
 			QString Pseudo, MDP;
 			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
-			if (rxL.indexIn(str) != -1) 
+			if (rxL.indexIn(str) != -1)
 			{
 				Pseudo = rxL.cap(2);
 				MDP = rxL.cap(4);
@@ -75,27 +73,65 @@ void TCP_Serveur::onClientReadyRead()
 				QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 				db.setHostName("192.168.64.66");
 				db.setDatabaseName("QT");
-				db.setUserName("root");
-				db.setPassword("root");
-				bool ok = db.open();
+				db.setUserName("superuser");
+				db.setPassword("superuser");
 				QSqlQuery query(db);
 
-				query.exec("SELECT Pseudo, MDP FROM User");
-				QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
-				retour = query.exec(requete);
-
-				if (retour) {
-					obj->write("LOK");
+				if (!db.open()) {
+					ui.connectionStatusLabel->setText("Pb de connexion a la db");
 				}
-				else {
-					obj->write("NLOK");
+				else
+				{
+					QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
+					retour = query.exec(requete);
+
+					
+					if (query.size() > 0) {
+						obj->write("LOK");
+					}
+					else {
+						obj->write("NLOK");
+					} 
 				}
 			}
-
 		}
 		else if (rx.exactMatch("INSCRIPTION"))
 		{
+			//QRegExp rxL("^LOGIN :: Pseudo ::([^\t]+)MDP :([^\t]+)");
 
+			QString Pseudo, MDP;
+			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
+			if (rxL.indexIn(str) != -1)
+			{
+				Pseudo = rxL.cap(2);
+				MDP = rxL.cap(4);
+
+				QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+				db.setHostName("192.168.64.66");
+				db.setDatabaseName("QT");
+				db.setUserName("superuser");
+				db.setPassword("superuser");
+				QSqlQuery query(db);
+
+				if (!db.open()) {
+					ui.connectionStatusLabel->setText("Pb de connexion a la db");
+				}
+				else
+				{
+					QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
+					retour = query.exec(requete);
+
+
+					if (query.size() == 0) {
+						obj->write("IOK");
+						QString requete = "INSERT INTO `User`(`Pseudo`, `MDP`) VALUES ('" + Pseudo + "','" + MDP + "')";
+						retour = query.exec(requete);
+					}
+					else {
+						obj->write("NIOK");
+					}
+				}
+			}
 		}
 		else
 		{
