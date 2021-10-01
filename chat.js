@@ -99,3 +99,34 @@
             setTimeout("DateTime()", 1000)
         }
         window.onload = DateTime;
+
+    // WebSocket
+        // Connexion WebSocket
+            const socket = new WebSocket('ws://localhost:8080');
+
+        // Connexion ouverte
+            socket.addEventListener('open', function (event) {
+                socket.send('Coucou le serveur !');
+            });
+
+        // Écoute des messages
+            socket.addEventListener('message', function (event) {
+                console.log('Voici un message du serveur', event.data);
+                if(/*   Je recoit un truc qui me dit que le login est bon   */){
+                    AuthmLogin(User_ID,User_Pseudo);
+                }
+                else if(/*   Je recoit un truc qui me dit que l'inscription est bonne   */){
+                    
+                }
+                else if(/*   Je recoit un message classique   */){
+                    
+                }
+            });
+
+    // Authentification
+        // Login
+        AuthmLogin(User_ID,User_Pseudo){
+            document.CookieUser = "Cookie_Pseudo=" + User_Pseudo + "; Cookie_ID=" + User_ID + "; Secure";
+            var User_Pseudo = CookieUser['Pseudo'];
+            var User_ID = CookieUser['ID'];
+        }
