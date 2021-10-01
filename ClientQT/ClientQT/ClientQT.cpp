@@ -126,8 +126,6 @@ void ClientQT::envoieInfoConnexion()
 	{
 		//Envoie des infos entré dans formulaire : 
 		socket->write("LOGIN :: Pseudo :: "+ PseudoEncode +" :: MDP : "+MdPEncode);
-
-		//socket->write("LOGIN " + PseudoEncode + " " + MdPEncode);
 	}
 	//Faire vérification à partir de serveur, recevoir la reponse pour afficher ou non le chat
 }
@@ -139,8 +137,8 @@ void ClientQT::envoieInscription()
 	ui.envoieInfoLogin->setEnabled(false);
 
 	//On recupere ce qui a été saisi dans le formulaire
-	QString InscriptionPseudo = ui.linePseudo->text();
-	QString InscriptionMdP = ui.lineMdP->text();
+	QString InscriptionPseudo = ui.linePseudoInscription->text();
+	QString InscriptionMdP = ui.lineMdPInscription->text();
 
 	//Convertion des donnée en Array pour envoyer au serveur
 	QByteArray InscriptionPseudoEncode = InscriptionPseudo.toUtf8();
@@ -152,7 +150,7 @@ void ClientQT::envoieInscription()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("Inscription :: Pseudo :: " + InscriptionPseudoEncode + " :: MDP : " + InscriptionMdPEncode);
+		socket->write("INSCRIPTION :: Pseudo :: " + InscriptionPseudoEncode + " :: MDP : " + InscriptionMdPEncode);
 		//socket->write("INSCRIPTION " + InscriptionPseudoEncode + " " + InscriptionMdPEncode);
 	}
 }
