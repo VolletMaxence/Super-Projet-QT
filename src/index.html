@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <title>Scripts javascript : Aper�u</title>
+    <SCRIPT LANGUAGE="JavaScript1.2">
+        //contenu du message
+        message = "outils-web.com Outils Webmasters";
+        //interval de couleurs du texte
+        colours = new Array('000099', 'ff6600')
+        siZe = 30;
+        message = message.split(' ');
+        timer = null;
+        clrPos = 0;
+        msgPos = 0;
+        jog = 1;
+        currentStep = 10;
+        step = 8;
+        ns = (document.layers) ? 1 : 0;
+        viz = (document.layers) ? 'hide' : 'hidden';
+        if (ns)
+            document.write("<div id='T' style='position:absolute'></div><br>");
+        else {
+            document.write("<div style='position:absolute'>");
+            document.write("<div align='center' style='position:relative'>");
+            document.write(
+                "<div id='T' style='position:absolute;width:0;height:0;font-family:Arial;font-size:0'>kurt</div>");
+            document.write("</div></div><br>");
+        }
+
+        function Message() {
+            var pageHeight = (document.layers) ? window.innerHeight : window.document.body.offsetHeight;
+            var pageWidth = (document.layers) ? window.innerWidth : window.document.body.offsetWidth;
+            if (ns) {
+                ypos = pageHeight / 2;
+                var Write = '<div align="center" style="width:0px;height:0px;font-family:Arial,Verdana;font-size:' +
+                    currentStep / 4 + 'px;color:' + colours[clrPos] + '">' + message[msgPos] + '</div>';
+                document.T.top = ypos + -currentStep / 8 + window.pageYOffset;
+                document.T.document.write(Write)
+                document.T.document.close();
+            } else {
+                ypos = pageHeight / 2;
+                xpos = pageWidth / 2;
+                T.style.width = currentStep;
+                T.style.pixelTop = ypos + -currentStep / 16 + document.body.scrollTop;
+                T.style.pixelLeft = (xpos - 20) + -currentStep / 2;
+                T.style.fontSize = currentStep / 8;
+                T.innerHTML = message[msgPos];
+                T.style.color = colours[clrPos];
+            }
+            if (ns) step += 5;
+            else step += 15;
+            currentStep += step
+            if (ns) {
+                if (currentStep > pageWidth) {
+                    currentStep = 10;
+                    step = 8;
+                    msgPos += jog;
+                    clrPos += jog;
+                }
+                if (clrPos >= colours.length) clrPos = 0;
+            } else {
+                if (currentStep > pageWidth * siZe) {
+                    currentStep = 10;
+                    step = 8;
+                    msgPos += jog;
+                    clrPos += jog;
+                }
+                if (clrPos >= colours.length) clrPos = 0;
+            }
+            if (msgPos >= message.length) {
+                clearTimeout(timer);
+                if (ns) document.T.visibility = viz;
+                else T.style.visibility = viz;
+            }
+            //r�glage de la vitesse
+            timer = setTimeout("Message()", 30)
+        }
+        //http://www.multimania.lycos.fr
+    </script>
+
+</head>
+
+<BODY onLoad="Message()" bgcolor="#FFFFFF">
+
+    <br />
+    <p class="tt">Effet de texte 2</p><br /><br />
+
+
+</html>
