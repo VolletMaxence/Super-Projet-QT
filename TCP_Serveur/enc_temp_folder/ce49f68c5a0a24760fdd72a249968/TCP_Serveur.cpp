@@ -45,13 +45,24 @@ void TCP_Serveur::onClientReadyRead()
 	QRegExp rx("\\b(LOGIN|INSCRIPTION|MSG100)\\b");
 	rx.indexIn(str);  
 
+
+	//QRegExp rx("^(.+) :: Pseudo :: (.+) MDP : (.+)");
+	//QStringList test = rx.capturedTexts();
+	//qDebug() << test[0];
+
 	int pos = rx.indexIn(str);
 	if (pos > -1) 
 	{
 		QString Info = rx.cap(1); // Info de ce qui est demander
 
+		//QString Pseudo = rx.cap(2); 
+		//QString MdP = rx.cap(3);
+
+
 		if (Info == "LOGIN")
 		{
+			//QRegExp rxL("^LOGIN :: Pseudo ::([^\t]+)MDP :([^\t]+)");
+
 			QString Pseudo, MDP;
 			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
 			if (rxL.indexIn(str) != -1)
@@ -86,6 +97,8 @@ void TCP_Serveur::onClientReadyRead()
 		}
 		else if (rx.exactMatch("INSCRIPTION"))
 		{
+			//QRegExp rxL("^LOGIN :: Pseudo ::([^\t]+)MDP :([^\t]+)");
+
 			QString Pseudo, MDP;
 			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
 			if (rxL.indexIn(str) != -1)
@@ -128,4 +141,16 @@ void TCP_Serveur::onClientReadyRead()
 
 	//Récupérer chaque groupe en String
 	//Vérifier le premier pour envoyer aprés
+
+
+	// Pseudo :: (.+) MDP : (.+) = e qui donne group Pseudo / mdp
+	// ^LOGIN :: 
+
 }
+/*
+void TCP_Serveur::Login()
+{
+
+
+}
+*/
