@@ -141,4 +141,16 @@ void TCP_Serveur::onClientReadyRead()
 
 	//Récupérer chaque groupe en String
 	//Vérifier le premier pour envoyer aprés
+
+
+	// Pseudo :: (.+) MDP : (.+) = e qui donne group Pseudo / mdp
+	// ^LOGIN :: 
+
 }
+/*
+void TCP_Serveur::Login()
+{
+
+
+}
+*/
