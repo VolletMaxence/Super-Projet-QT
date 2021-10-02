@@ -2,6 +2,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_websocketc.h"
+#include <qtcpsocket.h>
 
 class websocketc : public QMainWindow
 {
@@ -12,4 +13,11 @@ public:
 
 private:
     Ui::websocketcClass ui;
+	QTcpSocket * socket;
+
+public slots: 
+	void ConnexionServerTcp();
+	void TCPconnected();
+	void TCPdesconect();
+
 };
