@@ -17,7 +17,9 @@ private:
 
 public slots: 
 	void ConnexionServerTcp();
+	void EnvoyerMess();
 	void TCPconnected();
 	void TCPdesconect();
+	
 
 };

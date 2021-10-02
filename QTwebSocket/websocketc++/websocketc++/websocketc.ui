@@ -99,6 +99,19 @@
      <string>Connexion</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="envoyerMess">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>250</y>
+      <width>131</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>envoyer message</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
