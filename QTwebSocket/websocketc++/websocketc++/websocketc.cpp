@@ -7,6 +7,7 @@ websocketc::websocketc(QWidget *parent)
 	socket = new QTcpSocket(this);
 	QObject::connect(socket, SIGNAL(connected()), this, SLOT(TCPconnected())); //regarde sur on est connecter au server TCP
 	QObject::connect(socket, SIGNAL(disconnected()), this, SLOT(TCPdesconect())); //regarde si on est déconnecter au server TCP
+	QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(RidefMess()));
 }
 
 void websocketc::ConnexionServerTcp() {
@@ -19,6 +20,10 @@ void websocketc::ConnexionServerTcp() {
 	if (ok) {
 		socket->connectToHost(ip, portAsInt);
 	}
+}
+
+void websocketc::disco() {
+	socket->disconnectFromHost();
 }
 
 //affiche serveur TCP : coonecter si le websoket est bien connecter au server TCP
@@ -36,6 +41,13 @@ void websocketc::EnvoyerMess() {
 
 	if (socket->state() == QTcpSocket::ConnectedState) { //on vérifi dabort si on est connecter au server TCP pour pas envoyer le message dans le vide
 														 //et que cala return une erreur
-	socket -> write("test");
+	socket -> write("test\n");
 	}
+}
+
+void websocketc::RidefMess() {
+
+	QByteArray mess = socket->read(socket->bytesAvailable());
+	QString str(mess);
+	ui.statusMes->setText("des nouveau message son dispo (" + mess + ")");
 }

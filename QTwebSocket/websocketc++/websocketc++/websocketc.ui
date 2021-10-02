@@ -112,6 +112,32 @@
      <string>envoyer message</string>
     </property>
    </widget>
+   <widget class="QLabel" name="statusMes">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>60</y>
+      <width>311</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="deconnection">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>260</y>
+      <width>93</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Déconnection</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -154,8 +180,42 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>envoyerMess</sender>
+   <signal>clicked()</signal>
+   <receiver>websocketcClass</receiver>
+   <slot>EnvoyerMess()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>415</x>
+     <y>303</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>deconnection</sender>
+   <signal>clicked()</signal>
+   <receiver>websocketcClass</receiver>
+   <slot>disco()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>116</x>
+     <y>313</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ConnexionServerTcp()</slot>
+  <slot>EnvoyerMess()</slot>
+  <slot>disco()</slot>
  </slots>
 </ui>
