@@ -6,8 +6,7 @@
 #include <QtWebSockets/QtWebSockets>
 #include <QWebSocketServer>
 
-
-
+class WebServer;
 
 class websocketc : public QMainWindow
 {
@@ -19,6 +18,7 @@ public:
 private:
     Ui::websocketcClass ui;
 	QTcpSocket * socket;
+	WebServer *Qtwebserver;
 
 public slots: 
 	void ConnexionServerTcp();
@@ -27,6 +27,5 @@ public slots:
 	void TCPconnected();
 	void TCPdesconect();
 	void RidefMess();
-	
-
+	void envoiMess(const QString &message);
 };
