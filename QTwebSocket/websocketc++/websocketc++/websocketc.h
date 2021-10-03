@@ -3,6 +3,11 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_websocketc.h"
 #include <qtcpsocket.h>
+#include <QtWebSockets/QtWebSockets>
+#include <QWebSocketServer>
+
+
+
 
 class websocketc : public QMainWindow
 {
