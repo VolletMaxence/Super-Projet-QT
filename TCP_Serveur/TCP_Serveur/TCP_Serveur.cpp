@@ -43,10 +43,10 @@ void TCP_Serveur::onClientReadyRead()
 	ui.Message->setText(str);
 
 	QRegExp rx("\\b(LOGIN|INSCRIPTION|MSG100)\\b");
-	rx.indexIn(str);  
+	rx.indexIn(str);
 
 	int pos = rx.indexIn(str);
-	if (pos > -1) 
+	if (pos > -1)
 	{
 		QString Info = rx.cap(1); // Info de ce qui est demander
 
@@ -74,13 +74,13 @@ void TCP_Serveur::onClientReadyRead()
 					QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
 					retour = query.exec(requete);
 
-					
+
 					if (query.size() > 0) {
 						obj->write("LOK");
 					}
 					else {
 						obj->write("NLOK");
-					} 
+					}
 				}
 			}
 		}
@@ -120,7 +120,7 @@ void TCP_Serveur::onClientReadyRead()
 			}
 			else if (rx.exactMatch("MESSAGE"))
 			{
-				QString Pseudo, MDP;
+				QString Pseudo, MSG;
 				QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
 				if (rxL.indexIn(str) != -1)
 				{
@@ -147,48 +147,51 @@ void TCP_Serveur::onClientReadyRead()
 					{
 						//Choper ID user qui a envoyer le message : 
 						QString requete = "SELECT `ID` FROM `User` WHERE `Pseudo`='" + Pseudo + "'";
-						IDUser = query.exec(requete);
+						QString IDUser = query.exec(requete);
 
-						QString requete = "INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "','" + MSG + "')";
+						requete = "INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "' , '" + MSG + "')";
 						retour = query.exec(requete);
 					}
 				}
-		}
-		else
-		{
-			//Envoyer les 100 derniers messages
-			QString Pseudo, MDP;
-			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
-			if (rxL.indexIn(str) != -1)
+			}
+			else
 			{
-				Pseudo = rxL.cap(2);
-				MDP = rxL.cap(4);
-
-				QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-				db.setHostName("192.168.64.66");
-				db.setDatabaseName("QT");
-				db.setUserName("superuser");
-				db.setPassword("superuser");
-				QSqlQuery query(db);
-
-				if (!db.open()) {
-					ui.connectionStatusLabel->setText("Pb de connexion a la db");
-				}
-				else
+				//Envoyer les 100 derniers messages
+				QString Pseudo, MDP;
+				QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
+				if (rxL.indexIn(str) != -1)
 				{
-					//Recuperer les 100 derniers messages
-					QString requete = "SELECT Content FROM `Message` ORDER BY `Date` DESC LIMIT 100;";
-					retour = query.exec(requete);
+					Pseudo = rxL.cap(2);
+					MDP = rxL.cap(4);
 
-					//envoyer les 100 dernier message
-					if (query.size() != 0) {
-						obj->write(requete);
-						retour;
+					QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+					db.setHostName("192.168.64.66");
+					db.setDatabaseName("QT");
+					db.setUserName("superuser");
+					db.setPassword("superuser");
+					QSqlQuery query(db);
+
+					if (!db.open())
+					{
+						ui.connectionStatusLabel->setText("Pb de connexion a la db");
+					}
+					else
+					{
+						//Recuperer les 100 derniers messages
+						QString requete = "SELECT Content FROM `Message` ORDER BY `Date` DESC LIMIT 100;";
+						retour = query.exec(requete);
+
+						//envoyer les 100 dernier message
+						if (query.size() != 0)
+						{
+							obj->write("retour");
+							retour;
+						}
 					}
 				}
+			}
 		}
 	}
-
 	//Récupérer chaque groupe en String
 	//Vérifier le premier pour envoyer aprés
 }
