@@ -1,10 +1,14 @@
 #include "websocketc.h"
 #include "WebServer.h"
+#include <QWebSocket>
+
 
 websocketc::websocketc(QWidget *parent)
     : QMainWindow(parent)
 {
     ui.setupUi(this);
+	
+
 	socket = new QTcpSocket(this);
 	Qtwebserver = new WebServer(this);
 	Qtwebserver->listen(QHostAddress::Any, 4321);
@@ -13,6 +17,7 @@ websocketc::websocketc(QWidget *parent)
 	QObject::connect(socket, SIGNAL(readyRead()), this, SLOT(RidefMess())); //regarde sur un nouveau message arrive depuis le tcp server
 	connect(Qtwebserver, SIGNAL(envoiMess(QString)), this, SLOT(envoiMess(QString))); //regarde si un client du web socket envoyer un message ver le tcp server
 }
+
 
 //fonction qui permet au websocket server de se connecter au tcp server
 void websocketc::ConnexionServerTcp() {
