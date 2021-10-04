@@ -8,7 +8,7 @@
 #include <QByteArray.h> 
 
 TCP_Serveur::TCP_Serveur(QWidget *parent)
-    : QMainWindow(parent)
+	: QMainWindow(parent)
 {
 	ui.setupUi(this);
 	socket = new QTcpSocket(this);
@@ -24,7 +24,7 @@ void TCP_Serveur::onServerNewConnection()
 	QTcpSocket * client = server->nextPendingConnection();
 	QObject::connect(client, SIGNAL(readyRead()), this, SLOT(onClientReadyRead()));
 	QObject::connect(client, SIGNAL(disconnect()), this, SLOT(onClientDisconnected()));
-} 
+}
 
 void TCP_Serveur::onClientDisconnected()
 {
@@ -178,15 +178,13 @@ void TCP_Serveur::onClientReadyRead()
 					else
 					{
 						//Recuperer les 100 derniers messages
-						QString requete = "SELECT Content FROM `Message` ORDER BY `Date` DESC LIMIT 100;";
-						retour = query.exec(requete);
-
-						//envoyer les 100 dernier message
-						if (query.size() != 0)
-						{
-							obj->write("retour");
-							retour;
+						QSqlQuery query("SELECT Content FROM `Message` ORDER BY `Date` DESC LIMIT 100");
+						while (query.next()) {
+							QString message = query.value(0).toString();
+							obj->write(message);
+							doSomething(message);
 						}
+
 					}
 				}
 			}
