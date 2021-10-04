@@ -169,11 +169,19 @@ void ClientQT::envoieMessage()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write("MESSAGE :: Pseudo ::"+ PseudoStock + " :: MDP : " + MessageEntreeEncode + " \n");
+		socket->write("MESSAGE :: Pseudo :: "+ PseudoStock + " :: MESSAGE : " + MessageEntreeEncode + " \n");
 	}
 
 	//Effacer ce qu'il y avait dans la zone de texte : pas de spam
 	ui.texteAEnvoyer->clear();
+
+	ui.connectVous->setVisible(false);
+	ui.labelPseudo->setVisible(false);
+	ui.labelMdP->setVisible(false);
+	ui.linePseudo->setVisible(false);
+	ui.lineMdP->setVisible(false);
+	ui.envoieInfoLogin->setVisible(false);
+	ui.buttonRedirectCreationUser->setVisible(false);
 }
 
 //Reception et trie de tout message envoyer par le serveur
@@ -193,7 +201,12 @@ void ClientQT::onSocketReadyRead()
 	else if (str == "IOK" || str == "NIOK")
 	{
 		ClientQT::receptionInfoInscription(str);
-	} else
+	}
+	else if (str == "MSG100")
+	{
+		ClientQT::priseCentDernierMessage();
+	}
+	else
 	{
 		ClientQT::receptionInfoMessage(str);
 	}
