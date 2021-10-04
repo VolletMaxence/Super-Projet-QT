@@ -169,7 +169,7 @@ void ClientQT::envoieMessage()
 	if (socket->state() == QTcpSocket::ConnectedState)
 	{
 		//Envoie des infos entré dans formulaire : 
-		socket->write(PseudoStock + " : " + MessageEntreeEncode + " \n");
+		socket->write("MESSAGE :: Pseudo ::"+ PseudoStock + " :: MDP : " + MessageEntreeEncode + " \n");
 	}
 
 	//Effacer ce qu'il y avait dans la zone de texte : pas de spam

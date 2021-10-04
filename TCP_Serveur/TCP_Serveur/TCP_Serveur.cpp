@@ -108,7 +108,6 @@ void TCP_Serveur::onClientReadyRead()
 					QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
 					retour = query.exec(requete);
 
-
 					if (query.size() == 0) {
 						obj->write("IOK");
 						QString requete = "INSERT INTO `User`(`Pseudo`, `MDP`) VALUES ('" + Pseudo + "','" + MDP + "')";
@@ -119,6 +118,41 @@ void TCP_Serveur::onClientReadyRead()
 					}
 				}
 			}
+			else if (rx.exactMatch("MESSAGE"))
+			{
+				QString Pseudo, MDP;
+				QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
+				if (rxL.indexIn(str) != -1)
+				{
+					//Pseudo
+					Pseudo = rxL.cap(2);
+					//Message
+					MSG = rxL.cap(4);
+					//On fisonne le message avec le pseudo du random qui écrit
+					MSG = Pseudo + " : " + MSG;
+
+					//Connexion à BDD
+					QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+					db.setHostName("192.168.64.66");
+					db.setDatabaseName("QT");
+					db.setUserName("superuser");
+					db.setPassword("superuser");
+					QSqlQuery query(db);
+
+
+					if (!db.open()) {
+						ui.connectionStatusLabel->setText("Pb de connexion a la db");
+					}
+					else
+					{
+						//Choper ID user qui a envoyer le message : 
+						QString requete = "SELECT `ID` FROM `User` WHERE `Pseudo`='" + Pseudo + "'";
+						IDUser = query.exec(requete);
+
+						QString requete = "INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "','" + MSG + "')";
+						retour = query.exec(requete);
+					}
+				}
 		}
 		else
 		{
@@ -143,16 +177,13 @@ void TCP_Serveur::onClientReadyRead()
 				else
 				{
 					//Recuperer les 100 derniers messages
-					QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
+					QString requete = "SELECT Content FROM `Message` ORDER BY `Date` DESC LIMIT 100;";
 					retour = query.exec(requete);
 
-
+					//envoyer les 100 dernier message
 					if (query.size() != 0) {
 						obj->write(requete);
 						retour;
-					}
-					else {
-						obj->write("NIOK");
 					}
 				}
 		}
