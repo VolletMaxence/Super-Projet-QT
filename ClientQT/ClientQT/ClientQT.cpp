@@ -311,6 +311,8 @@ void ClientQT::receptionInfoMessage(QString str)
 	//recuperer les messages envoyer par le monsieur
 	ui.texteRecu->setText(str);
 	ui.texteRecu->verticalScrollBar()->setValue(ui.texteRecu->verticalScrollBar()->maximum());
+
+
 	//texteRecu
 }
 

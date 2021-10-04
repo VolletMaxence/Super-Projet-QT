@@ -123,6 +123,38 @@ void TCP_Serveur::onClientReadyRead()
 		else
 		{
 			//Envoyer les 100 derniers messages
+			QString Pseudo, MDP;
+			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
+			if (rxL.indexIn(str) != -1)
+			{
+				Pseudo = rxL.cap(2);
+				MDP = rxL.cap(4);
+
+				QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+				db.setHostName("192.168.64.66");
+				db.setDatabaseName("QT");
+				db.setUserName("superuser");
+				db.setPassword("superuser");
+				QSqlQuery query(db);
+
+				if (!db.open()) {
+					ui.connectionStatusLabel->setText("Pb de connexion a la db");
+				}
+				else
+				{
+					//Recuperer les 100 derniers messages
+					QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
+					retour = query.exec(requete);
+
+
+					if (query.size() != 0) {
+						obj->write(requete);
+						retour;
+					}
+					else {
+						obj->write("NIOK");
+					}
+				}
 		}
 	}
 
