@@ -25,7 +25,8 @@ void TCP_Serveur::onServerNewConnection()
 	QObject::connect(client, SIGNAL(readyRead()), this, SLOT(onClientReadyRead()));
 	QObject::connect(client, SIGNAL(disconnect()), this, SLOT(onClientDisconnected()));
 	//Sauvegarde Client dans tableau
-	ListClient[TailleTableau] = client;
+	TCP_Serveur::ListClient[TailleTableau] = client;
+	TCP_Serveur::TailleTableau++;
 }
 
 void TCP_Serveur::onClientDisconnected()
@@ -72,9 +73,9 @@ void TCP_Serveur::onClientReadyRead()
 					QByteArray MessageEncode = message.toUtf8();
 
 					//ENVOYER A TOUS
-					for (i = 0, i < TailleTableau, i++)
+					for (i = 0, i < TCP_Serveur::TailleTableau, i++)
 					{
-						ListClient[i]->write(MessageEncode + "\n");
+						TCP_Serveur::ListClient[i]->write(MessageEncode + "\n");
 
 					}
 				}
