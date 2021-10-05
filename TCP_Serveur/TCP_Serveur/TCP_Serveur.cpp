@@ -68,6 +68,8 @@ void TCP_Serveur::onClientReadyRead()
 				{
 					QString message = query.value(0).toString();
 					QByteArray MessageEncode = message.toUtf8();
+
+					//ENVOYER A TOUS
 					obj->write(MessageEncode + "\n");
 				}
 			}
@@ -161,38 +163,45 @@ void TCP_Serveur::onClientReadyRead()
 					Pseudo = rxL.cap(2);
 					//Message
 					MSG = rxL.cap(4);
-					//On fisonne le message avec le pseudo du random qui écrit
-					MSG = Pseudo + " : " + MSG;
-
-					//Connexion à BDD
-					QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-					db.setHostName("192.168.64.66");
-					db.setDatabaseName("QT");
-					db.setUserName("superuser");
-					db.setPassword("superuser");
-					QSqlQuery query(db);
-
-
-					if (!db.open()) {
-						ui.connectionStatusLabel->setText("Pb de connexion a la db");
-					}
-					else
+					//Si le message est vide :
+					if (MSG.isEmpty())
 					{
-						//Choper ID user qui a envoyer le message : 
-						query.prepare("SELECT `ID` FROM `User` WHERE `Pseudo`='"+ Pseudo + "'");
-						if (query.exec())
-						{
-							//Récupère le résultat de la requête
-							query.next();
-							QString IDUser = query.value(0).toString();	
+						//On affiche rien
+						return;
+					}else
+						//On fisonne le message avec le pseudo du random qui écrit
+						MSG = Pseudo + " : " + MSG;
 
-							query.prepare("INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "' , '" + MSG + "')");
-							query.exec();
+						//Connexion à BDD
+						QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+						db.setHostName("192.168.64.66");
+						db.setDatabaseName("QT");
+						db.setUserName("superuser");
+						db.setPassword("superuser");
+						QSqlQuery query(db);
 
 
+						if (!db.open()) {
+							ui.connectionStatusLabel->setText("Pb de connexion a la db");
 						}
-						//On récupère le MSG100
-						obj->write("MSG100");
+						else
+						{
+							//Choper ID user qui a envoyer le message : 
+							query.prepare("SELECT `ID` FROM `User` WHERE `Pseudo`='" + Pseudo + "'");
+							if (query.exec())
+							{
+								//Récupère le résultat de la requête
+								query.next();
+								QString IDUser = query.value(0).toString();
+
+								query.prepare("INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "' , '" + MSG + "')");
+								query.exec();
+
+
+							}
+							//On récupère le MSG100
+							obj->write("MSG100");
+						}
 					}
 				}
 			}
