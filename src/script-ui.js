@@ -44,9 +44,10 @@ $(function(){
                 var IN_PassWord =   in_password.val();
                 in_dialog.dialog("close");
                 // Affichage afin de vérifier - tester
-                    window.alert('Le Pseudo est \"' + IN_Pseudo + '\" et le Mots de Passe est \"'+ IN_PassWord + '\".');
+                    //window.alert('Le Pseudo est \"' + IN_Pseudo + '\" et le Mots de Passe est \"'+ IN_PassWord + '\".');
                 // Requettes à envoyer
-                    window.alert('INSCRIPTION : "INSCRIPTION :: Pseudo :: IN_Pseudo :: MdP : IN_PassWord "');
+                    console.log('Je renvoie un INSCRIPTION : INSCRIPTION :: Pseudo :: " + IN_Pseudo + " :: MdP : " + IN_PassWord');
+                    socket.send("INSCRIPTION :: Pseudo :: " + IN_Pseudo + " :: MdP : " + IN_PassWord);
             };
             return valid;
         };
@@ -67,9 +68,12 @@ $(function(){
                     var CO_PassWord =   co_password.val();
                     co_dialog.dialog("close");
                     // Affichage afin de vérifier - tester
-                        window.alert('Le Pseudo est \"' + CO_Pseudo + '\" et le Mots de Passe est \"'+ CO_PassWord + '\".');
+                        //window.alert('Le Pseudo est \"' + CO_Pseudo + '\" et le Mots de Passe est \"'+ CO_PassWord + '\".');
                     // Requettes à envoyer
-                        window.alert('LOGIN : "LOGIN :: Pseudo :: IN_Pseudo :: MdP : IN_PassWord "');
+                        console.log('Je renvoie un LOGIN : LOGIN :: Pseudo :: " + CO_Pseudo + " :: MdP : " + CO_PassWord');
+                        socket.send("LOGIN :: Pseudo :: " + CO_Pseudo + " :: MdP : " + CO_PassWord);
+                    // Définition Temporaire variable
+                        var Temp_CO_Pseudo = CO_Pseudo;
                 };
                 return valid;
         };

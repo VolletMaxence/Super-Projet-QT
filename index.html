@@ -91,11 +91,11 @@
     </body>
     <script>
         // Définition du Cookie en attendant serveur
-            if(typeof CookieUser !== 'undefined'){
-                Affichage(0);
+            if(typeof document.cookie !== 'undefined'){
+                Affichage(1);
             }
             else{
-                Affichage(1);
+                Affichage(2);
             };
     </script>
 </html>
