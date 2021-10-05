@@ -16,6 +16,8 @@ public:
     TCP_Serveur(QWidget *parent = Q_NULLPTR);
 	char retour;
 	char requete;
+	int TailleTableau = 0;
+	char ListClient[TailleTableau];
 
 private:
 	

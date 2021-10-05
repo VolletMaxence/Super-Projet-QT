@@ -303,6 +303,7 @@ void ClientQT::receptionInfoLogin(QString str)
 		ui.envoieInfoLogin->setVisible(false);
 		ui.buttonRedirectCreationUser->setVisible(false);
 		ui.labelErreur->setText("");
+		ui.labelErreur->setVisible(false);
 
 		//Remplir le Chat (c est deugeulasse, putain de zoophile)
 		ClientQT::priseCentDernierMessage();

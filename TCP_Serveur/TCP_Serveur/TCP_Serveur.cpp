@@ -24,6 +24,9 @@ void TCP_Serveur::onServerNewConnection()
 	QTcpSocket * client = server->nextPendingConnection();
 	QObject::connect(client, SIGNAL(readyRead()), this, SLOT(onClientReadyRead()));
 	QObject::connect(client, SIGNAL(disconnect()), this, SLOT(onClientDisconnected()));
+	//Sauvegarde Client dans tableau
+	TCP_Serveur::ListClient[TailleTableau] = client;
+	TCP_Serveur::TailleTableau++;
 }
 
 void TCP_Serveur::onClientDisconnected()
@@ -67,7 +70,13 @@ void TCP_Serveur::onClientReadyRead()
 				{
 					QString message = query.value(0).toString();
 					QByteArray MessageEncode = message.toUtf8();
-					obj->write(MessageEncode + "\n");
+
+					//ENVOYER A TOUS
+					for (i = 0, i < TCP_Serveur::TailleTableau, i++)
+					{
+						TCP_Serveur::ListClient[i]->write(MessageEncode + "\n");
+
+					}
 				}
 			}
 		}
@@ -160,16 +169,16 @@ void TCP_Serveur::onClientReadyRead()
 					Pseudo = rxL.cap(2);
 					//Message
 					MSG = rxL.cap(4);
-					//On fusionne le message avec le pseudo du random qui écrit
+					//On fisonne le message avec le pseudo du random qui écrit
 					MSG = Pseudo + " : " + MSG;
 
-					//Connexion à BDD
-					QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-					db.setHostName("192.168.64.66");
-					db.setDatabaseName("QT");
-					db.setUserName("superuser");
-					db.setPassword("superuser");
-					QSqlQuery query(db);
+						//Connexion à BDD
+						QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+						db.setHostName("192.168.64.66");
+						db.setDatabaseName("QT");
+						db.setUserName("superuser");
+						db.setPassword("superuser");
+						QSqlQuery query(db);
 
 
 					if (!db.open()) {
@@ -177,7 +186,7 @@ void TCP_Serveur::onClientReadyRead()
 					}
 					else
 					{
-						//Récupérer ID user qui a envoyé le message : 
+						//Choper ID user qui a envoyer le message : 
 						query.prepare("SELECT `ID` FROM `User` WHERE `Pseudo`='"+ Pseudo + "'");
 						if (query.exec())
 						{
@@ -185,13 +194,12 @@ void TCP_Serveur::onClientReadyRead()
 							query.next();
 							QString IDUser = query.value(0).toString();	
 
-							query.prepare("INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "' , '" + MSG + "')");
-							query.exec();
-
-
+								query.prepare("INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "' , '" + MSG + "')");
+								query.exec();
+							}
+							//On récupère le MSG100
+							obj->write("MSG100");
 						}
-						//On récupère le MSG100
-						obj->write("MSG100");
 					}
 				}
 			}
