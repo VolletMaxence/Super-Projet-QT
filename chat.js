@@ -1,10 +1,10 @@
     // Variables
         var AuthChat;
 
-    // Deffinition Variable CookieUser
-        if(typeof CookieUser !== 'undefined'){
-            var User_Pseudo = CookieUser['Pseudo'];
-            //var User_ID = CookieUser['ID'];
+    // Deffinition Variable cookie
+        if(typeof cookie !== 'undefined'){
+            var User_Pseudo = cookie['Cookie_Pseudo'];
+            //var User_ID = cookie['ID'];
         }
         else{
             var User_Pseudo = "Default";
@@ -121,6 +121,8 @@
                 if(event.data === "LOK"){ // Si le serveur me répond favorablement pour la connexion.
                     if(Temp_CO_Pseudo !== 'undefined'){
                         AuthmLogin(Temp_CO_Pseudo);
+                        window.location.reload();
+                        console.log('Rafraichisement de la page');
                     }
                 }
                 //else if(){
@@ -148,7 +150,13 @@
     // Authentification
         // Login
         function AuthmLogin(User_Pseudo){
-            document.CookieUser = "Cookie_Pseudo=" + User_Pseudo;// + "//; Cookie_ID=" + User_ID + "; Secure";
-            //var User_Pseudo = CookieUser['Pseudo'];
-            //var User_ID = CookieUser['ID'];
+            document.cookie = "Cookie_Pseudo=" + User_Pseudo;// + "//; Cookie_ID=" + User_ID + "; Secure";
+            //var User_Pseudo = cookie['Pseudo'];
+            //var User_ID = cookie['ID'];
+        }
+        // Déconnexion
+        function unlogin(){
+            document.cookie = 'Cookie_Pseudo=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+            window.location.reload();
+            console.log('Rafraichisement de la page');
         }
