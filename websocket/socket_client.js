@@ -9,15 +9,22 @@ function Message(){
     document.getElementById('message').value = "";
     socket.send(message);
     afficheMess(message);
+    //socket.send("MESSAGE :: Pseudo :: "+ pseudo +" :: MESSAGE : " + message + "\n");
 }
 
 
 //fonction qui permet de s'inscrire
 function inscriptin(){
+    var login = document.getElementById('message').value;
+    var mdp = document.getElementById('message').value;
+    socket.send("INSCRIPTION :: Pseudo :: " + login + " :: MDP : " + mdp);
 
 }
 //fonction qui permet de se connecter
 function connection(){
+    var login = document.getElementById('message').value;
+    var mdp = document.getElementById('message').value;
+    socket.send("LOGIN :: Pseudo :: "+ login +" :: MDP : "+ mdp);
 
 }
 socket.onmessage = function(recu){

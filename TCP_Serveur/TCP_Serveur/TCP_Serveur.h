@@ -17,7 +17,7 @@ public:
 	char retour;
 	char requete;
 	int TailleTableau = 0;
-	QTcpSocket * ListClient[20];
+	QTcpSocket * ListClient[1000];
 
 private:
 	

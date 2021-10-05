@@ -203,7 +203,8 @@ void TCP_Serveur::onClientReadyRead()
 						}
 					}
 				}
-			}/* else if (str == "MSG101")
+			}/*
+			else if (str == "MSG101")
 			{
 				QString Pseudo, MSG;
 				QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");

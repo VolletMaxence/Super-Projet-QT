@@ -166,14 +166,21 @@ void ClientQT::envoieMessage()
 	QByteArray PseudoStock = ClientQT::save_Pseudo.toUtf8();
 
 	//Si on est bien connecter : 
-	if (socket->state() == QTcpSocket::ConnectedState)
+	if (MessageEntree == NULL)
 	{
-		//Envoie des infos entré dans formulaire : 
-		socket->write("MESSAGE :: Pseudo :: "+ PseudoStock + " :: MESSAGE : " + MessageEntreeEncode + " \n");
+		//On fait rien, on envoie pas de message sans rien
 	}
+	else
+	{
+		if (socket->state() == QTcpSocket::ConnectedState)
+		{
+			//Envoie des infos entré dans formulaire : 
+			socket->write("MESSAGE :: Pseudo :: " + PseudoStock + " :: MESSAGE : " + MessageEntreeEncode + " \n");
+		}
 
-	//Effacer ce qu'il y avait dans la zone de texte : pas de spam
-	ui.texteAEnvoyer->clear();
+		//Effacer ce qu'il y avait dans la zone de texte : pas de spam
+		ui.texteAEnvoyer->clear();
+	}
 
 	ui.connectVous->setVisible(false);
 	ui.labelPseudo->setVisible(false);
@@ -307,6 +314,9 @@ void ClientQT::receptionInfoLogin(QString str)
 
 		//Remplir le Chat (c est deugeulasse, putain de zoophile)
 		ClientQT::priseCentDernierMessage();
+
+		//Envoie message de connexion
+
 	}
 	else if (str == "NLOK")
 	{
@@ -369,4 +379,16 @@ void ClientQT::priseCentDernierMessage()
 
 	//On demande les 100 derniers messages depuis la BDD
 	socket->write("MSG100");
+}
+
+//Demande des 100 derniers messages stocker en base
+void ClientQT::priseCentDernierMessageLogin()
+{
+	//Mettre la scrollbar au maximum
+
+	//On demande les 100 derniers messages depuis la BDD
+	//Envoyer le pseudo avec
+	QByteArray PseudoStock = ClientQT::save_Pseudo.toUtf8();
+
+	socket->write("MSG101 :: Pseudo :: "+ PseudoStock + " :: MSG : " + PseudoStock +" c'est connecté.");
 }
