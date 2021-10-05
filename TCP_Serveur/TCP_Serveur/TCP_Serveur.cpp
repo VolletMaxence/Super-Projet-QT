@@ -24,6 +24,7 @@ void TCP_Serveur::onServerNewConnection()
 	QTcpSocket * client = server->nextPendingConnection();
 	QObject::connect(client, SIGNAL(readyRead()), this, SLOT(onClientReadyRead()));
 	QObject::connect(client, SIGNAL(disconnect()), this, SLOT(onClientDisconnected()));
+
 	//Sauvegarde Client dans tableau
 	TCP_Serveur::ListClient[TailleTableau] = client;
 	TCP_Serveur::TailleTableau++;
