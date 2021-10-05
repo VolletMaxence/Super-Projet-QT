@@ -166,14 +166,21 @@ void ClientQT::envoieMessage()
 	QByteArray PseudoStock = ClientQT::save_Pseudo.toUtf8();
 
 	//Si on est bien connecter : 
-	if (socket->state() == QTcpSocket::ConnectedState)
+	if (MessageEntree == NULL)
 	{
-		//Envoie des infos entré dans formulaire : 
-		socket->write("MESSAGE :: Pseudo :: "+ PseudoStock + " :: MESSAGE : " + MessageEntreeEncode + " \n");
+		//On fait rien, on envoie pas de message sans rien
 	}
+	else
+	{
+		if (socket->state() == QTcpSocket::ConnectedState)
+		{
+			//Envoie des infos entré dans formulaire : 
+			socket->write("MESSAGE :: Pseudo :: " + PseudoStock + " :: MESSAGE : " + MessageEntreeEncode + " \n");
+		}
 
-	//Effacer ce qu'il y avait dans la zone de texte : pas de spam
-	ui.texteAEnvoyer->clear();
+		//Effacer ce qu'il y avait dans la zone de texte : pas de spam
+		ui.texteAEnvoyer->clear();
+	}
 
 	ui.connectVous->setVisible(false);
 	ui.labelPseudo->setVisible(false);
