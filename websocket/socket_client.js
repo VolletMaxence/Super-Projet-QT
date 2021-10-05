@@ -1,6 +1,6 @@
 var socket = null;
 
-//socket = new WebSocket("ws://127.0.0.1:4321");
+socket = new WebSocket("ws://127.0.0.1:4321");
 
 //fonction qui permet d'envoyer un message au server tcp
 
@@ -20,7 +20,9 @@ function inscriptin(){
 function connection(){
 
 }
-
+socket.onmessage = function(recu){
+    console.log("un message a etais recu");
+}
 
 function afficheMess(Message){
     var li = document.createElement('p');

@@ -1,6 +1,7 @@
 #include "WebServer.h"
 #include <QWebSocket>
 
+
 WebServer::WebServer(QObject *parent) : QWebSocketServer("serverWebsocketqt", QWebSocketServer::NonSecureMode, parent)
 {
 	mSocket = NULL;

@@ -14,6 +14,7 @@ class websocketc : public QMainWindow
 
 public:
     websocketc(QWidget *parent = Q_NULLPTR);
+	
 
 private:
     Ui::websocketcClass ui;
