@@ -72,7 +72,7 @@ void TCP_Serveur::onClientReadyRead()
 					QByteArray MessageEncode = message.toUtf8();
 
 					//ENVOYER A TOUS
-					for (i = 0, i < TCP_Serveur::TailleTableau, i++)
+					for (int i = 0; i < TCP_Serveur::TailleTableau; i++)
 					{
 						TCP_Serveur::ListClient[i]->write(MessageEncode + "\n");
 
@@ -196,7 +196,7 @@ void TCP_Serveur::onClientReadyRead()
 
 								query.prepare("INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "' , '" + MSG + "')");
 								query.exec();
-							}
+							
 							//On récupère le MSG100
 							obj->write("MSG100");
 						}
