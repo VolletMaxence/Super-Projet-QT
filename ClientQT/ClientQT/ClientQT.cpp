@@ -307,6 +307,9 @@ void ClientQT::receptionInfoLogin(QString str)
 
 		//Remplir le Chat (c est deugeulasse, putain de zoophile)
 		ClientQT::priseCentDernierMessage();
+
+		//Envoie message de connexion
+
 	}
 	else if (str == "NLOK")
 	{
@@ -369,4 +372,16 @@ void ClientQT::priseCentDernierMessage()
 
 	//On demande les 100 derniers messages depuis la BDD
 	socket->write("MSG100");
+}
+
+//Demande des 100 derniers messages stocker en base
+void ClientQT::priseCentDernierMessageLogin()
+{
+	//Mettre la scrollbar au maximum
+
+	//On demande les 100 derniers messages depuis la BDD
+	//Envoyer le pseudo avec
+	QByteArray PseudoStock = ClientQT::save_Pseudo.toUtf8();
+
+	socket->write("MSG101 :: Pseudo :: "+ PseudoStock + " :: MSG : " + PseudoStock +" c'est connecté.");
 }
