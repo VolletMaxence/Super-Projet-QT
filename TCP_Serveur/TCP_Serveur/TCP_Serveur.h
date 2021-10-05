@@ -17,7 +17,7 @@ public:
 	char retour;
 	char requete;
 	int TailleTableau = 0;
-	char ListClient[TailleTableau];
+	char ListClient[];
 
 private:
 	

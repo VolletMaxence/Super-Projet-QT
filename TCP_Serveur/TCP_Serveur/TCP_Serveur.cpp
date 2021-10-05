@@ -65,7 +65,7 @@ void TCP_Serveur::onClientReadyRead()
 			else
 			{
 				//Récupérer les 100 derniers messages
-				QSqlQuery query("SELECT Content FROM `Message` ORDER BY `Date` ASC LIMIT 100");
+				QSqlQuery query("SELECT Content FROM `Message` WHERE `Affichage`=1 ORDER BY `Date` ASC LIMIT 100;");
 				while (query.next())
 				{
 					QString message = query.value(0).toString();
