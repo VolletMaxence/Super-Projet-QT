@@ -89,8 +89,6 @@ void ClientQT::onSocketDisonnected()
 	ui.buttonConnexionServeur->setVisible(true);
 
 	ui.infoServeur->setText("Le serveur ne fonctionne pas, cliquer sur le boutton pour reessayer.");
-
-
 }
 
 //Connexion au serveur
@@ -127,7 +125,6 @@ void ClientQT::envoieInfoConnexion()
 		//Envoie des infos entré dans formulaire : 
 		socket->write("LOGIN :: Pseudo :: "+ PseudoEncode +" :: MDP : "+MdPEncode);
 	}
-	//Faire vérification à partir de serveur, recevoir la reponse pour afficher ou non le chat
 }
 
 //Envoie de ce qui a été stocker dans le formulaire d'inscription
@@ -204,20 +201,16 @@ void ClientQT::onSocketReadyRead()
 	if (str == "LOK" || str == "NLOK")
 	{
 		ClientQT::receptionInfoLogin(str);
-	}
-	else if (str == "IOK" || str == "NIOK")
+	} else if (str == "IOK" || str == "NIOK")
 	{
 		ClientQT::receptionInfoInscription(str);
-	}
-	else if (str == "MSG100")
+	} else if (str == "MSG100")
 	{
 		ClientQT::priseCentDernierMessage();
-	}
-	else
+	} else
 	{
 		ClientQT::receptionInfoMessage(str);
 	}
-
 }
 
 //Déconnexion : retour au formulaire de connexion
@@ -240,7 +233,6 @@ void ClientQT::deconnexion()
 	ui.lineMdP->setVisible(true);
 	ui.envoieInfoLogin->setVisible(true);
 	ui.buttonRedirectCreationUser->setVisible(true);
-
 }
 
 //Envoie vers formulaire inscription
@@ -322,11 +314,12 @@ void ClientQT::receptionInfoLogin(QString str)
 	{
 		//Affichage message d erreur
 		ui.labelErreur->setText("Ce compte n'existe pas.");
-	}
 
+		ui.labelPseudo->clear();
+		ui.labelMdP->clear();
+	}
 	//ON remet en place le boutton pour recommencer au cas où il le faudrait
 	ui.envoieInfoLogin->setEnabled(true);
-
 }
 
 //Reception des info de messages depuis le Serveur
@@ -335,9 +328,6 @@ void ClientQT::receptionInfoMessage(QString str)
 	//recuperer les messages envoyer par le monsieur
 	ui.texteRecu->setText(str);
 	ui.texteRecu->verticalScrollBar()->setValue(ui.texteRecu->verticalScrollBar()->maximum());
-
-
-	//texteRecu
 }
 
 //Reception des info d'inscription depuis le Serveur
@@ -367,16 +357,12 @@ void ClientQT::receptionInfoInscription(QString str)
 		//Affichage message d erreur
 		ui.labelErreur->setText("Ce compte existe déjà.");
 	}
-
 	ui.envoieInfoLogin->setEnabled(true);
 }
 
 //Demande des 100 derniers messages stocker en base
 void ClientQT::priseCentDernierMessage()
 {
-	//Mettre la scrollbar au maximum
-
-
 	//On demande les 100 derniers messages depuis la BDD
 	socket->write("MSG100");
 }
