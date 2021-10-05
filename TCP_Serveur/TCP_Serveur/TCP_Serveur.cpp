@@ -176,6 +176,7 @@ void TCP_Serveur::onClientReadyRead()
 						//On affiche rien
 						return;
 					}else
+					{
 						//On fisonne le message avec le pseudo du random qui écrit
 						MSG = Pseudo + " : " + MSG;
 
@@ -188,7 +189,8 @@ void TCP_Serveur::onClientReadyRead()
 						QSqlQuery query(db);
 
 
-						if (!db.open()) {
+						if (!db.open()) 
+						{
 							ui.connectionStatusLabel->setText("Pb de connexion a la db");
 						}
 						else
@@ -203,8 +205,6 @@ void TCP_Serveur::onClientReadyRead()
 
 								query.prepare("INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "' , '" + MSG + "')");
 								query.exec();
-
-
 							}
 							//On récupère le MSG100
 							obj->write("MSG100");
