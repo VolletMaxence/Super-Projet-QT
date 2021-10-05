@@ -42,83 +42,116 @@ void TCP_Serveur::onClientReadyRead()
 
 	ui.Message->setText(str);
 
-	QRegExp rx("\\b(LOGIN|INSCRIPTION|MSG100)\\b");
-	rx.indexIn(str);
-
-	int pos = rx.indexIn(str);
-	if (pos > -1)
+	if (str == "MSG100")
 	{
-		QString Info = rx.cap(1); // Info de ce qui est demander
-
-		if (Info == "LOGIN")
+		ui.Message->setText("GG t es rentré ou il faut");
+		//Envoyer les 100 derniers messages
+		QRegExp rxL("^([^\t]+)");
+		if (rxL.indexIn(str) != -1)
 		{
-			QString Pseudo, MDP;
-			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
-			if (rxL.indexIn(str) != -1)
+			QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+			db.setHostName("192.168.64.66");
+			db.setDatabaseName("QT");
+			db.setUserName("superuser");
+			db.setPassword("superuser");
+			QSqlQuery query(db);
+
+			if (!db.open())
 			{
-				Pseudo = rxL.cap(2);
-				MDP = rxL.cap(4);
-
-				QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-				db.setHostName("192.168.64.66");
-				db.setDatabaseName("QT");
-				db.setUserName("superuser");
-				db.setPassword("superuser");
-				QSqlQuery query(db);
-
-				if (!db.open()) {
-					ui.connectionStatusLabel->setText("Pb de connexion a la db");
-				}
-				else
+				ui.connectionStatusLabel->setText("Pb de connexion a la db");
+			}
+			else
+			{
+				//Recuperer les 100 derniers messages
+				QSqlQuery query("SELECT Content FROM `Message` ORDER BY `Date` ASC LIMIT 100");
+				while (query.next())
 				{
-					QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
-					retour = query.exec(requete);
-
-
-					if (query.size() > 0) {
-						obj->write("LOK");
-					}
-					else {
-						obj->write("NLOK");
-					}
+					QString message = query.value(0).toString();
+					QByteArray MessageEncode = message.toUtf8();
+					obj->write(MessageEncode + "\n");
 				}
 			}
 		}
-		else if (rx.exactMatch("INSCRIPTION"))
+	}
+	else
+	{
+		QRegExp rx("(LOGIN|INSCRIPTION|MESSAGE)");
+		rx.indexIn(str);
+
+		int pos = rx.indexIn(str);
+		if (pos > -1)
 		{
-			QString Pseudo, MDP;
-			QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
-			if (rxL.indexIn(str) != -1)
+			QString Info = rx.cap(1); // Info de ce qui est demander
+
+			if (Info == "LOGIN")
 			{
-				Pseudo = rxL.cap(2);
-				MDP = rxL.cap(4);
-
-				QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-				db.setHostName("192.168.64.66");
-				db.setDatabaseName("QT");
-				db.setUserName("superuser");
-				db.setPassword("superuser");
-				QSqlQuery query(db);
-
-				if (!db.open()) {
-					ui.connectionStatusLabel->setText("Pb de connexion a la db");
-				}
-				else
+				QString Pseudo, MDP;
+				QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
+				if (rxL.indexIn(str) != -1)
 				{
-					QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
-					retour = query.exec(requete);
+					Pseudo = rxL.cap(2);
+					MDP = rxL.cap(4);
 
-					if (query.size() == 0) {
-						obj->write("IOK");
-						QString requete = "INSERT INTO `User`(`Pseudo`, `MDP`) VALUES ('" + Pseudo + "','" + MDP + "')";
-						retour = query.exec(requete);
+					QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+					db.setHostName("192.168.64.66");
+					db.setDatabaseName("QT");
+					db.setUserName("superuser");
+					db.setPassword("superuser");
+					QSqlQuery query(db);
+
+					if (!db.open()) {
+						ui.connectionStatusLabel->setText("Pb de connexion a la db");
 					}
-					else {
-						obj->write("NIOK");
+					else
+					{
+						QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
+						retour = query.exec(requete);
+
+
+						if (query.size() > 0) {
+							obj->write("LOK");
+						}
+						else {
+							obj->write("NLOK");
+						}
 					}
 				}
-			}
-			else if (rx.exactMatch("MESSAGE"))
+			} else if (Info == "INSCRIPTION")
+			{
+				QString Pseudo, MDP;
+				QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
+				if (rxL.indexIn(str) != -1)
+				{
+					Pseudo = rxL.cap(2);
+					MDP = rxL.cap(4);
+
+					QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+					db.setHostName("192.168.64.66");
+					db.setDatabaseName("QT");
+					db.setUserName("superuser");
+					db.setPassword("superuser");
+					QSqlQuery query(db);
+
+					if (!db.open()) {
+						ui.connectionStatusLabel->setText("Pb de connexion a la db");
+					}
+					else
+					{
+						QString requete = "SELECT * FROM User WHERE Pseudo = '" + Pseudo + "' AND MDP = '" + MDP + "'";
+						retour = query.exec(requete);
+
+						if (query.size() == 0) {
+							obj->write("IOK");
+							QString requete = "INSERT INTO `User`(`Pseudo`, `MDP`) VALUES ('" + Pseudo + "','" + MDP + "')";
+							retour = query.exec(requete);
+						}
+						else {
+							obj->write("NIOK");
+						}
+					}
+				}
+				
+			} else if (Info == "MESSAGE")
 			{
 				QString Pseudo, MSG;
 				QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
@@ -146,50 +179,23 @@ void TCP_Serveur::onClientReadyRead()
 					else
 					{
 						//Choper ID user qui a envoyer le message : 
-						QString requete = "SELECT `ID` FROM `User` WHERE `Pseudo`='" + Pseudo + "'";
-						QString IDUser = query.exec(requete);
+						query.prepare("SELECT `ID` FROM `User` WHERE `Pseudo`='"+ Pseudo + "'");
+						if (query.exec())
+						{
+							//Récupère le résultat de la requête
+							query.next();
+							QString IDUser = query.value(0).toString();	
 
-						requete = "INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "' , '" + MSG + "')";
-						retour = query.exec(requete);
-					}
-				}
-			}
-			else
-			{
-				//Envoyer les 100 derniers messages
-				QString Pseudo, MDP;
-				QRegExp rxL("^([^\t]+) :: ([^\t]+) :: ([^\t]+) : ([^\t]+)$");
-				if (rxL.indexIn(str) != -1)
-				{
-					Pseudo = rxL.cap(2);
-					MDP = rxL.cap(4);
+							query.prepare("INSERT INTO `Message`(`IDUser`, `Content`) VALUES ('" + IDUser + "' , '" + MSG + "')");
+							query.exec();
 
-					QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-					db.setHostName("192.168.64.66");
-					db.setDatabaseName("QT");
-					db.setUserName("superuser");
-					db.setPassword("superuser");
-					QSqlQuery query(db);
 
-					if (!db.open())
-					{
-						ui.connectionStatusLabel->setText("Pb de connexion a la db");
-					}
-					else
-					{
-						//Recuperer les 100 derniers messages
-						QSqlQuery query("SELECT Content FROM `Message` ORDER BY `Date` DESC LIMIT 100");
-						while (query.next()) {
-							QString message = query.value(0).toString();
-							obj->write(message);
-							doSomething(message);
 						}
-
+						//On récupère le MSG100
+						obj->write("MSG100");
 					}
 				}
 			}
 		}
 	}
-	//Récupérer chaque groupe en String
-	//Vérifier le premier pour envoyer aprés
 }
