@@ -44,7 +44,6 @@ void TCP_Serveur::onClientReadyRead()
 
 	if (str == "MSG100")
 	{
-		ui.Message->setText("GG t es rentré ou il faut");
 		//Envoyer les 100 derniers messages
 		QRegExp rxL("^([^\t]+)");
 		if (rxL.indexIn(str) != -1)
@@ -62,7 +61,7 @@ void TCP_Serveur::onClientReadyRead()
 			}
 			else
 			{
-				//Recuperer les 100 derniers messages
+				//Récupérer les 100 derniers messages
 				QSqlQuery query("SELECT Content FROM `Message` ORDER BY `Date` ASC LIMIT 100");
 				while (query.next())
 				{
@@ -161,7 +160,7 @@ void TCP_Serveur::onClientReadyRead()
 					Pseudo = rxL.cap(2);
 					//Message
 					MSG = rxL.cap(4);
-					//On fisonne le message avec le pseudo du random qui écrit
+					//On fusionne le message avec le pseudo du random qui écrit
 					MSG = Pseudo + " : " + MSG;
 
 					//Connexion à BDD
@@ -178,7 +177,7 @@ void TCP_Serveur::onClientReadyRead()
 					}
 					else
 					{
-						//Choper ID user qui a envoyer le message : 
+						//Récupérer ID user qui a envoyé le message : 
 						query.prepare("SELECT `ID` FROM `User` WHERE `Pseudo`='"+ Pseudo + "'");
 						if (query.exec())
 						{
