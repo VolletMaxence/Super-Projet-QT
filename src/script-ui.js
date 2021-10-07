@@ -32,24 +32,26 @@ $(function(){
         function IN_User(){
             var valid = true;
             in_allFields.removeClass("ui-state-error");
-
-            valid = valid && in_checkLength(in_name, "username", 3, 16);
-            valid = valid && in_checkLength(in_password, "password", 5, 16);
-
-            valid = valid && in_checkRegexp(in_name, /^[a-z]([0-9a-z_\s])+$/i, "Le nom d'utilisateur ne peut-être que composé de chiffres, de lettres, d'underscores, d'espaces, et doit commencer par une lettre.");
-            valid = valid && in_checkRegexp(in_password, /^([0-9a-zA-Z])+$/, "Le mot de passe n'autorise que des chiffres et des lettres.");
-
-            if(valid){
-                var IN_Pseudo   =   in_name.val();
-                var IN_PassWord =   in_password.val();
-                in_dialog.dialog("close");
-                // Affichage afin de vérifier - tester
-                    //window.alert('Le Pseudo est \"' + IN_Pseudo + '\" et le Mots de Passe est \"'+ IN_PassWord + '\".');
-                // Requettes à envoyer
-                    console.log('Je renvoie un INSCRIPTION : INSCRIPTION :: Pseudo :: " + IN_Pseudo + " :: MdP : " + IN_PassWord');
-                    socket.send("INSCRIPTION :: Pseudo :: " + IN_Pseudo + " :: MdP : " + IN_PassWord);
-            };
-            return valid;
+            // Vérifie que les valeurs sont entre un minimums et un maximums de caractères
+                valid = valid && in_checkLength(in_name, "username", 3, 16);
+                valid = valid && in_checkLength(in_password, "password", 5, 16);
+            // Vérification qu'il n'y a pas de carractères spéciaux non autorisé
+                valid = valid && in_checkRegexp(in_name, /^[a-z]([0-9a-z_\s])+$/i, "Le nom d'utilisateur ne peut-être que composé de chiffres, de lettres, d'underscores, d'espaces, et doit commencer par une lettre.");
+                valid = valid && in_checkRegexp(in_password, /^([0-9a-zA-Z])+$/, "Le mot de passe n'autorise que des chiffres et des lettres.");
+            // Si tout est validé
+                if(valid){
+                    var IN_Pseudo   =   in_name.val();
+                    var IN_PassWord =   in_password.val();
+                    in_dialog.dialog("close");
+                    // Affichage afin de vérifier - tester
+                        //window.alert('Le Pseudo est \"' + IN_Pseudo + '\" et le Mots de Passe est \"'+ IN_PassWord + '\".');
+                    // Requettes à envoyer
+                        console.log('Je renvoie un INSCRIPTION : INSCRIPTION :: Pseudo :: " + IN_Pseudo + " :: MdP : " + IN_PassWord');
+                        socket.send("INSCRIPTION :: Pseudo :: " + IN_Pseudo + " :: MdP : " + IN_PassWord);
+                    // Définition Temporaire variable
+                    var Temp_IN_Pseudo = IN_Pseudo;
+                };
+                return valid;
         };
 
     // Fonction Suivant Connection Bouton
