@@ -118,7 +118,7 @@
                     console.log('Je renvoie un MSG100');
                     socket.send("MSG100");
                 }
-                if(event.data === "LOK"){ // Si le serveur me répond favorablement pour la connexion.
+                else if(event.data === "LOK"){ // Si le serveur me répond favorablement pour la connexion.
                     if(Temp_CO_Pseudo !== 'undefined'){
                         AuthmLogin(Temp_CO_Pseudo);
                         window.location.reload();
